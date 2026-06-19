@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0057B7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Zenith Nova Academy">
+<meta name="description" content="Zenith Nova Academy — La plateforme éducative et compétitive N°1 du Bénin">
+<link rel="manifest" href="manifest.json">
+<title>Zenith Nova Academy 🎓</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F7FF;--card:#FFFFFF;--border:#C8E0F8;
+  --blue:#0057B7;--blue2:#0070CC;--light:#E8F4FF;
+  --gold:#F59E0B;--red:#EF4444;--green:#10B981;
+  --text:#0A1628;--muted:#5A7A99;--r:14px;--r2:20px;
+  --g1:linear-gradient(135deg,#0057B7,#00BFFF);
+  --g2:linear-gradient(135deg,#F59E0B,#EF4444);
+  --g3:linear-gradient(135deg,#10B981,#0057B7);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--blue2);border-radius:2px}
+
+/* BG */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 10% 0%,rgba(0,87,183,.07) 0%,transparent 50%),
+  radial-gradient(ellipse 60% 50% at 90% 100%,rgba(0,191,255,.05) 0%,transparent 50%)}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,87,183,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,87,183,.04) 1px,transparent 1px);
+  background-size:40px 40px}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:300;padding:10px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.96);border-bottom:1.5px solid var(--border);
+  box-shadow:0 2px 12px rgba(0,87,183,.08)}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.logo-box{width:36px;height:36px;background:var(--blue);border:2px solid var(--blue2);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 0 10px rgba(0,87,183,.3)}
+.logo-z{font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem;color:#fff;line-height:1}
+.logo-nova{position:absolute;top:-3px;right:-3px;width:8px;height:8px;
+  background:#FFD700;border-radius:50%;border:1px solid #fff;
+  box-shadow:0 0 5px #FFD700;animation:np 1.6s ease-in-out infinite}
+@keyframes np{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+.logo-wrap{position:relative}
+.logo-name{font-family:'Outfit',sans-serif;font-weight:900;font-size:1rem;color:var(--blue);letter-spacing:-.3px;line-height:1.1}
+.logo-tag{font-family:'Space Mono',monospace;font-size:.35rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block}
+.hdr-r{display:flex;gap:7px;align-items:center}
+.hdr-cta{background:var(--g1);border:none;color:#fff;padding:8px 16px;border-radius:50px;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,87,183,.3)}
+.hdr-cta:active{transform:scale(.97)}
+.hdr-menu{background:var(--light);border:1.5px solid var(--border);border-radius:9px;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  color:var(--blue);cursor:pointer;font-size:1rem;flex-shrink:0}
+.hdr-menu:active{background:var(--border)}
+
+/* TICKER */
+.ticker{position:relative;overflow:hidden;z-index:1;margin-top:59px;
+  background:var(--g1);padding:9px 0}
+.ticker-in{display:flex;animation:tick 45s linear infinite;white-space:nowrap;will-change:transform}
+@keyframes tick{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+.ticker-in span{font-family:'Outfit',sans-serif;font-size:.72rem;color:#fff;margin-right:55px;font-weight:600}
+.ticker-in span b{color:#FFD700}
+.ticker-lbl{position:absolute;left:0;top:0;bottom:0;z-index:2;
+  background:rgba(0,30,80,.5);padding:0 13px;display:flex;align-items:center;
+  font-family:'Space Mono',monospace;font-size:.56rem;color:#FFD700;letter-spacing:2px;font-weight:700;
+  border-right:1px solid rgba(255,255,255,.2)}
+
+/* NAV */
+.nav{display:none;position:fixed;top:59px;left:0;right:0;z-index:299;
+  background:rgba(255,255,255,.99);border-bottom:1.5px solid var(--border);
+  box-shadow:0 4px 20px rgba(0,87,183,.1);padding:10px;
+  flex-direction:column;gap:3px;max-height:82vh;overflow-y:auto}
+.nav.open{display:flex;animation:navD .22s ease}
+@keyframes navD{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.nav-sec{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--blue);
+  letter-spacing:4px;text-transform:uppercase;padding:8px 12px 3px;opacity:.7}
+.nav-btn{display:flex;align-items:center;gap:9px;color:var(--text);
+  padding:10px 12px;border-radius:11px;font-weight:500;font-size:.88rem;
+  cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:'Outfit',sans-serif}
+.nav-btn:active{background:var(--light)}
+.lang-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px 12px}
+.lang-p{background:var(--light);border:1.5px solid var(--border);border-radius:9px;
+  padding:8px;text-align:center;cursor:pointer;font-size:.8rem;font-weight:600;
+  border:none;color:var(--text);font-family:'Outfit',sans-serif}
+.lang-p.on{background:var(--blue);color:#fff}
+.lang-p:active{transform:scale(.97)}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:90vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 16px 60px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;
+  background:var(--light);border:1.5px solid var(--border);
+  border-radius:50px;padding:7px 16px;margin-bottom:20px;
+  font-family:'Space Mono',monospace;font-size:.6rem;color:var(--blue);
+  letter-spacing:2px;text-transform:uppercase}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--green);
+  border-radius:50%;animation:bl 1.5s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.1}}
+.hero-h{font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(2.6rem,10vw,5.5rem);line-height:.95;letter-spacing:-2px;margin-bottom:14px}
+.ht1{display:block;color:var(--blue)}
+.ht2{display:block;background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(.88rem,2.5vw,1.1rem);color:var(--muted);
+  max-width:480px;line-height:1.8;margin-bottom:32px;font-weight:300}
+.hero-sub b{color:var(--blue);font-weight:600}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.btn-p{background:var(--g1);border:none;color:#fff;padding:14px 30px;border-radius:50px;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,87,183,.3)}
+.btn-p:active{transform:scale(.97)}
+.btn-s{background:var(--light);border:1.5px solid var(--border);color:var(--blue);
+  padding:14px 28px;border-radius:50px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.92rem;cursor:pointer}
+.btn-s:active{background:var(--border)}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+.hs{text-align:center}
+.hs-n{font-family:'Outfit',sans-serif;font-weight:900;font-size:1.85rem;
+  background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hs-l{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:var(--blue);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;
+  animation:bob 2.2s ease-in-out infinite;opacity:.6}
+.scroll-hint::after{content:'';width:1px;height:28px;background:linear-gradient(to bottom,var(--blue),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* TRIAL */
+.trial-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(0,87,183,.07));
+  border:1.5px solid rgba(16,185,129,.25);border-radius:var(--r2);padding:15px 18px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  position:relative;z-index:1;margin:0 14px}
+.trial-box strong{color:var(--green);font-size:.97rem}
+.trial-box p{font-size:.75rem;color:var(--muted);margin-top:2px}
+.trial-btn{background:var(--green);border:none;color:#fff;padding:9px 20px;
+  border-radius:50px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap}
+.trial-btn:active{transform:scale(.97)}
+
+/* SECTIONS */
+.sec{position:relative;z-index:1;padding:28px 14px;max-width:1120px;margin:0 auto}
+.sec-tag{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--blue);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px}
+.sec-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.75rem,5vw,2.85rem);line-height:1.05;letter-spacing:-1px;margin-bottom:10px;color:var(--text)}
+.sec-p{color:var(--muted);font-size:.88rem;line-height:1.8;max-width:490px;margin-bottom:28px}
+.divider{height:1.5px;background:var(--border);margin:0 14px}
+
+/* GRID 2 COLUMNS */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+/* CARDS */
+.scard{background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);
+  padding:14px;cursor:pointer;position:relative;overflow:hidden;
+  transition:all .3s;box-shadow:0 2px 8px rgba(0,87,183,.06)}
+.scard:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 8px 24px rgba(0,87,183,.15)}
+.scard:active{transform:scale(.98)}
+.sc-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:1.3rem;margin-bottom:10px;background:var(--light)}
+.sc-ti{font-family:'Outfit',sans-serif;font-weight:700;font-size:.82rem;margin-bottom:4px;color:var(--text);line-height:1.3}
+.sc-de{color:var(--muted);font-size:.72rem;line-height:1.55;margin-bottom:9px}
+.sc-badges{display:flex;gap:4px;flex-wrap:wrap}
+.bdg{border-radius:50px;padding:2px 8px;font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700}
+.bdg-s{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--gold)}
+.bdg-f{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+.sc-tag{position:absolute;top:9px;right:9px;border-radius:50px;
+  padding:2px 7px;font-size:.52rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.t-h{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.22);color:var(--red)}
+.t-n{background:rgba(0,87,183,.1);border:1px solid rgba(0,87,183,.2);color:var(--blue)}
+.t-c{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--gold)}
+.t-e{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+.ca .sc-ico{background:rgba(0,87,183,.1)}
+.cb .sc-ico{background:rgba(239,68,68,.1)}
+.cc .sc-ico{background:rgba(0,191,255,.1)}
+.cd .sc-ico{background:rgba(16,185,129,.1)}
+.ce .sc-ico{background:rgba(245,158,11,.1)}
+.cf .sc-ico{background:rgba(139,92,246,.1)}
+.cg .sc-ico{background:rgba(236,72,153,.1)}
+.ch .sc-ico{background:rgba(59,130,246,.1)}
+
+/* SUBSCRIPTION */
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:22px}
+.sub-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);
+  padding:18px;text-align:center;position:relative;cursor:pointer}
+.sub-card:hover{border-color:var(--blue)}
+.sub-card.feat{border-color:var(--blue);background:rgba(0,87,183,.03)}
+.sub-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  background:var(--g1);color:#fff;padding:3px 14px;border-radius:50px;font-size:.6rem;font-weight:700;white-space:nowrap}
+.sub-ico{font-size:1.8rem;margin-bottom:8px}
+.sub-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px}
+.sub-price{font-family:'Playfair Display',serif;font-weight:900;font-size:1.7rem;
+  background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:3px}
+.sub-period{font-size:.65rem;color:var(--muted);margin-bottom:11px}
+.sub-feats{list-style:none;text-align:left;margin-bottom:12px}
+.sub-feats li{font-size:.72rem;color:var(--muted);padding:2px 0;display:flex;align-items:flex-start;gap:5px;line-height:1.5}
+.sub-feats li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.sub-btn{width:100%;background:var(--g1);border:none;color:#fff;padding:10px;border-radius:11px;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer}
+.sub-btn:active{transform:scale(.98)}
+.sub-btn.out{background:none;border:1.5px solid var(--border);color:var(--text)}
+
+/* MODAL */
+.mover{position:fixed;inset:0;z-index:500;display:none;align-items:flex-end;justify-content:center;
+  background:rgba(0,20,60,.7);backdrop-filter:blur(10px)}
+.mover.on{display:flex;animation:mFI .2s}
+@keyframes mFI{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border:1.5px solid var(--border);border-radius:24px 24px 0 0;
+  width:100%;max-width:640px;max-height:93vh;overflow-y:auto;
+  padding:20px 16px 48px;animation:mUp .35s cubic-bezier(.34,1.56,.64,1);
+  position:relative;scrollbar-width:thin}
+@keyframes mUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.m-hdl{width:32px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px}
+.m-x{position:absolute;top:12px;right:12px;width:30px;height:30px;
+  background:var(--light);border:1.5px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82rem;color:var(--muted)}
+.m-x:active{background:var(--border)}
+.m-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:12px;background:var(--light)}
+.modal h2{font-family:'Playfair Display',serif;font-weight:900;font-size:1.35rem;margin-bottom:6px;letter-spacing:-.5px;color:var(--text)}
+.m-desc{color:var(--muted);font-size:.82rem;line-height:1.72;margin-bottom:14px}
+
+/* FORM */
+.fg{background:var(--light);border:1.5px solid var(--border);border-radius:12px;padding:13px;margin-bottom:12px}
+.fg input,.fg textarea,.fg select{width:100%;background:#fff;border:1.5px solid var(--border);
+  border-radius:9px;color:var(--text);padding:11px 12px;font-family:'Outfit',sans-serif;font-size:.85rem;
+  margin-bottom:7px;outline:none;transition:border-color .2s;resize:vertical;-webkit-appearance:none}
+.fg input:last-child,.fg textarea:last-child,.fg select:last-child{margin-bottom:0}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--blue)}
+.fg select option{background:#fff}
+.gen-btn{width:100%;background:var(--g1);border:none;color:#fff;padding:14px;border-radius:12px;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(0,87,183,.25)}
+.gen-btn:active{transform:scale(.98)}
+.gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.f-ld{display:none;align-items:center;gap:8px;color:var(--muted);font-size:.75rem;margin-bottom:10px;font-family:'Space Mono',monospace}
+.f-ld.on{display:flex}
+.spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:sp .65s linear infinite;flex-shrink:0}
+@keyframes sp{to{transform:rotate(360deg)}}
+.f-out{background:var(--light);border:1.5px solid var(--border);border-radius:11px;padding:14px;
+  font-size:.85rem;line-height:1.9;color:var(--text);white-space:pre-wrap;display:none;margin-bottom:12px;max-height:280px;overflow-y:auto}
+.f-out.on{display:block;animation:mFI .4s}
+.succ{text-align:center;padding:12px 0;display:none}
+.succ.on{display:block;animation:mFI .5s}
+.s-circ{width:64px;height:64px;border-radius:50%;background:var(--g3);
+  display:flex;align-items:center;justify-content:center;font-size:1.9rem;
+  margin:0 auto 14px;animation:popI .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popI{from{transform:scale(0)}to{transform:scale(1)}}
+.succ h3{font-family:'Playfair Display',serif;font-weight:900;font-size:1.3rem;margin-bottom:6px}
+.succ p{color:var(--muted);font-size:.82rem;line-height:1.75;margin-bottom:12px}
+.act-btn{background:var(--light);border:1.5px solid var(--border);color:var(--text);
+  padding:9px 18px;border-radius:50px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;margin:3px}
+.act-btn:active{background:var(--border)}
+
+/* PAYMENT */
+.pay-steps{display:flex;align-items:center;margin-bottom:14px}
+.pst{display:flex;align-items:center;gap:4px;flex:1}
+.psn{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;
+  border:2px solid var(--border);color:var(--muted);transition:all .3s;flex-shrink:0}
+.psn.act{background:var(--g1);border-color:transparent;color:#fff}
+.psn.done{background:var(--green);border-color:transparent;color:#fff}
+.psl{font-size:.63rem;color:var(--muted);font-weight:500}
+.psl.act{color:var(--text)}
+.psline{flex:1;height:1px;background:var(--border);margin:0 4px}
+.ps{display:none}.ps.on{display:block;animation:mFI .3s}
+.amt-box{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(239,68,68,.07));
+  border:1.5px solid rgba(245,158,11,.2);border-radius:12px;padding:13px;text-align:center;margin-bottom:11px}
+.amt-n{font-family:'Outfit',sans-serif;font-weight:900;font-size:1.9rem;
+  background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.amt-conv{font-size:.68rem;color:var(--muted);margin-top:3px}
+.amt-anon{font-size:.67rem;color:var(--green);margin-top:4px;display:flex;align-items:center;justify-content:center;gap:4px}
+.anon-box{background:rgba(0,87,183,.05);border:1.5px solid rgba(0,87,183,.15);border-radius:11px;padding:12px;margin-bottom:11px}
+.anon-title{font-weight:700;font-size:.83rem;color:var(--blue);display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.anon-body{font-size:.76rem;color:var(--muted);line-height:1.68}
+.anon-body strong{color:var(--text)}
+.op-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.op-c{background:#fff;border:2px solid var(--border);border-radius:11px;padding:11px 7px;cursor:pointer;text-align:center;transition:all .2s}
+.op-c:active{transform:scale(.97)}
+.op-c.sel{border-color:var(--blue);background:var(--light)}
+.op-c.intl{grid-column:1/-1}
+.op-em{font-size:1.3rem;margin-bottom:3px}
+.op-nm{font-weight:700;font-size:.76rem}
+.op-sb{font-size:.62rem;color:var(--muted);margin-top:1px}
+.tel-wrap{background:var(--light);border:1.5px solid var(--border);border-radius:10px;padding:11px;margin-bottom:10px}
+.tel-row{display:flex;gap:6px;align-items:center}
+.tel-pre{background:#fff;border:1.5px solid var(--border);border-radius:7px;padding:9px 10px;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.tel-in{flex:1;background:#fff;border:2px solid var(--border);border-radius:7px;color:var(--text);padding:9px 11px;font-family:'Space Mono',monospace;font-size:.92rem;outline:none;letter-spacing:2px;-webkit-appearance:none;transition:border-color .2s}
+.tel-in:focus{border-color:var(--blue)}
+.tel-hint{font-size:.67rem;color:var(--muted);margin-top:5px;line-height:1.5}
+.instr-box{background:linear-gradient(135deg,rgba(245,158,11,.07),rgba(239,68,68,.05));border:1.5px solid rgba(245,158,11,.14);border-radius:11px;padding:12px;margin-bottom:10px}
+.instr-title{font-weight:700;font-size:.83rem;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.instr-list{display:flex;flex-direction:column;gap:5px}
+.instr-it{display:flex;gap:7px;align-items:flex-start}
+.instr-bub{min-width:18px;height:18px;border-radius:50%;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px}
+.instr-tx{font-size:.76rem;color:var(--muted);line-height:1.6}
+.instr-tx strong{color:var(--text);font-weight:600}
+.push-box{background:var(--light);border:1.5px solid var(--border);border-radius:10px;padding:13px;text-align:center;margin-bottom:11px}
+.push-ico{font-size:1.7rem;margin-bottom:4px}
+.push-st{font-size:.8rem;color:var(--blue);font-weight:600;margin-bottom:2px}
+.push-sub{font-size:.68rem;color:var(--muted);line-height:1.5}
+.pb{width:100%;border:none;padding:12px;border-radius:11px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;margin-top:5px}
+.pb.prim{background:var(--g1);color:#fff;box-shadow:0 6px 16px rgba(0,87,183,.25)}
+.pb.prim:active{transform:scale(.98)}
+.pb.ghost{background:var(--light);border:1.5px solid var(--border);color:var(--text);margin-top:6px}
+.pb.ghost:active{background:var(--border)}
+.curr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:11px}
+.curr-opt{background:#fff;border:2px solid var(--border);border-radius:8px;padding:7px 3px;text-align:center;cursor:pointer;font-size:.7rem;font-weight:600}
+.curr-opt:active{transform:scale(.97)}
+.curr-opt.sel{border-color:var(--blue);background:var(--light);color:var(--blue)}
+.curr-flag{font-size:.95rem;display:block;margin-bottom:2px}
+.curr-sub{font-size:.57rem;color:var(--muted);display:block;margin-top:1px}
+
+/* AUTH */
+.auth-in{width:100%;background:#fff;border:2px solid var(--border);border-radius:10px;
+  color:var(--text);padding:12px 13px;font-family:'Outfit',sans-serif;font-size:.88rem;
+  outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:9px}
+.auth-in:focus{border-color:var(--blue)}
+.auth-btn{width:100%;background:var(--g1);border:none;color:#fff;padding:13px;border-radius:11px;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer}
+.auth-btn:active{transform:scale(.98)}
+.auth-sw{font-size:.8rem;color:var(--muted);text-align:center;margin-top:9px}
+.auth-sw span{color:var(--blue);cursor:pointer;font-weight:600}
+
+/* QUIZ & GAMIFICATION */
+.lb-item{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.lb-rank{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;flex-shrink:0}
+.lb-rank.r1{background:linear-gradient(135deg,#FFD700,#F59E0B);color:#000}
+.lb-rank.r2{background:linear-gradient(135deg,#C0C0C0,#9CA3AF);color:#000}
+.lb-rank.r3{background:linear-gradient(135deg,#CD7F32,#92400E);color:#fff}
+.lb-rank.rn{background:var(--light);color:var(--blue)}
+.lb-name{flex:1;font-weight:600;font-size:.83rem}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--blue);font-weight:700}
+.lb-school{font-size:.63rem;color:var(--muted)}
+.quiz-q-text{font-weight:600;font-size:.88rem;margin-bottom:11px;line-height:1.5;color:var(--text)}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{background:var(--light);border:2px solid var(--border);border-radius:10px;padding:10px 13px;cursor:pointer;font-size:.83rem;text-align:left;font-family:'Outfit',sans-serif;color:var(--text);width:100%}
+.quiz-opt:active{transform:scale(.98)}
+.quiz-opt.correct{border-color:var(--green);background:rgba(16,185,129,.1);color:#065F46}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.08);color:#991B1B}
+.progress-bar{background:var(--border);border-radius:50px;height:7px;margin:7px 0;overflow:hidden}
+.progress-fill{background:var(--g1);height:100%;border-radius:50px;transition:width .5s}
+.badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0}
+.badge-item{background:#fff;border:1.5px solid var(--border);border-radius:11px;padding:9px 5px;text-align:center}
+.badge-item.earned{border-color:var(--gold);background:rgba(245,158,11,.05)}
+.badge-item.locked{opacity:.4}
+.badge-ico{font-size:1.4rem;margin-bottom:3px}
+.badge-nm{font-size:.58rem;color:var(--muted);font-weight:600;line-height:1.3}
+.pts-badge{background:var(--g1);border-radius:50px;padding:3px 12px;font-family:'Space Mono',monospace;font-size:.7rem;color:#fff;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+
+/* HOW & TESTIMONIALS */
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
+.how-c{background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:14px;position:relative;overflow:hidden}
+.how-n{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:rgba(0,87,183,.05);position:absolute;top:5px;right:10px;line-height:1}
+.how-ico{font-size:1.5rem;margin-bottom:10px}
+.how-c h4{font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px}
+.how-c p{color:var(--muted);font-size:.76rem;line-height:1.65}
+.t-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
+.t-c{background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:16px}
+.t-stars{color:var(--gold);font-size:.8rem;margin-bottom:6px}
+.t-tx{color:var(--muted);font-size:.78rem;line-height:1.76;margin-bottom:10px;font-style:italic}
+.t-au{display:flex;align-items:center;gap:7px}
+.t-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:#fff;flex-shrink:0}
+.t-nm{font-weight:700;font-size:.77rem}.t-ct{font-size:.65rem;color:var(--muted)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
+.rv.on{opacity:1;transform:translateY(0)}
+.scard,.sub-card,.how-c,.t-c,.lb-item{opacity:1;transform:none}
+
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:40px 16px 70px;
+  border-top:1.5px solid var(--border);color:var(--muted);font-size:.75rem;background:#fff}
+.f-logo{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:9px}
+.f-zbox{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.f-z{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:#fff}
+.f-name{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--blue)}
+footer p{margin-bottom:4px;line-height:1.9}
+.f-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:11px}
+.f-tag{display:inline-flex;align-items:center;gap:4px;border-radius:50px;padding:3px 10px;font-size:.6rem}
+.ft-b{background:rgba(0,87,183,.09);border:1px solid rgba(0,87,183,.18);color:var(--blue)}
+.ft-g{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.15);color:var(--green)}
+
+/* TOAST */
+.toast{position:fixed;bottom:66px;left:50%;transform:translateX(-50%) translateY(60px);
+  background:var(--blue);color:#fff;padding:9px 18px;border-radius:50px;
+  font-weight:700;font-size:.78rem;z-index:9999;
+  transition:transform .34s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;
+  box-shadow:0 8px 20px rgba(0,87,183,.28);pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+@media(max-width:600px){#quiz-profil-wrap{grid-template-columns:1fr !important}}
+@media(max-width:380px){.hero-h{font-size:2.4rem}.modal{padding:16px 12px 44px}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
+    <div class="logo-wrap">
+      <div class="logo-box"><span class="logo-z">Z</span></div>
+      <div class="logo-nova"></div>
+    </div>
+    <div>
+      <div class="logo-name">Zenith Nova Academy</div>
+      <small class="logo-tag">🎓 plateforme éducative · bénin</small>
+    </div>
+  </a>
+  <div class="hdr-r">
+    <button class="hdr-menu" id="menuBtn" onclick="toggleNav()">☰</button>
+    <button class="hdr-cta" onclick="goSec('services')">Démarrer →</button>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav" id="navEl">
+  <div class="nav-sec">🎓 Navigation</div>
+  <button class="nav-btn" onclick="goSec('quiz-daily')">🏆 Quiz Quotidien</button>
+  <button class="nav-btn" onclick="goSec('mon-profil')">🎖️ Mon Profil & Badges</button>
+  <button class="nav-btn" onclick="goSec('services')">🛠️ Services IA</button>
+  <button class="nav-btn" onclick="goSec('education')">📚 Cours & Révisions</button>
+  <button class="nav-btn" onclick="goSec('culture')">👑 Culture Bénin</button>
+  <button class="nav-btn" onclick="goSec('metiers')">🔧 Métiers</button>
+  <button class="nav-btn" onclick="goSec('abonnement')">💳 Abonnement</button>
+  <div class="nav-sec">🌐 Langue</div>
+  <div class="lang-row">
+    <button class="lang-p on" onclick="setLang('fr',this)">🇫🇷 Français</button>
+    <button class="lang-p" onclick="setLang('en',this)">🇬🇧 English</button>
+    <button class="lang-p" onclick="setLang('fon',this)">🇧🇯 Fon</button>
+    <button class="lang-p" onclick="setLang('yo',this)">🇳🇬 Yoruba</button>
+  </div>
+  <div class="nav-sec">👤 Compte</div>
+  <button class="nav-btn" onclick="openM('auth')">🔐 Connexion / Inscription</button>
+  <button class="nav-btn" id="navUser" style="display:none" onclick="showProfile()">👤 Mon profil</button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-lbl">🎓 LIVE</div>
+  <div class="ticker-in">
+    <span>✦ <b>Zenith Nova Academy</b> — La plateforme éducative et compétitive N°1 du Bénin 🇧🇯</span>
+    <span>✦ <b>48h d'essai GRATUIT</b> · Quiz quotidiens · Classements nationaux · Badges · Récompenses</span>
+    <span>✦ Abonnement <b>500 FCFA / mois</b> · MTN MoMo · Moov Money · Celtiis · Carte bancaire</span>
+    <span>✦ De la maternelle à l'université · Programmes officiels du Bénin · IA 24h/24</span>
+    <span>✦ Parrainage : un ami s'abonne = <b>-20% sur ton prochain mois</b> 🎁</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge" id="hBadge">🎓 La Plateforme Éducative N°1 du Bénin</div>
+  <h1 class="hero-h">
+    <span class="ht1" id="hT1">Apprends,</span>
+    <span class="ht2" id="hT2">comprends & réussis !</span>
+  </h1>
+  <p class="hero-sub" id="hSub">La première plateforme de <b>compétition scolaire nationale</b> du Bénin. Quiz, classements, badges et récompenses. De la maternelle à l'université.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="openM('auth')">🚀 Essai gratuit 48h</button>
+    <button class="btn-s" onclick="goSec('services')">Explorer →</button>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">Quiz</div><div class="hs-l">Quotidiens</div></div>
+    <div class="hs"><div class="hs-n">48h</div><div class="hs-l">Gratuit</div></div>
+    <div class="hs"><div class="hs-n">500F</div><div class="hs-l">/ mois</div></div>
+    <div class="hs"><div class="hs-n">🏆</div><div class="hs-l">Compétition</div></div>
+  </div>
+  <div class="scroll-hint">Défiler</div>
+</div>
+
+<!-- TRIAL -->
+<div style="position:relative;z-index:1;margin:0 14px">
+  <div class="trial-box rv">
+    <div><strong>🎓 48 heures d'essai GRATUIT</strong><p>Quiz · Cours · Classements · Badges · Aucune carte requise</p></div>
+    <button class="trial-btn" onclick="openM('auth')">Commencer gratuitement</button>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:20px"></div>
+
+<!-- QUIZ QUOTIDIEN -->
+<div style="position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 14px;display:grid;grid-template-columns:1fr 1fr;gap:14px" id="quiz-profil-wrap"><section class="sec" id="quiz-daily" style="padding:28px 0">
+  <div class="sec-tag rv">✦ Défi du jour</div>
+  <h2 class="sec-h rv">Quiz Quotidien 🏆</h2>
+  <p class="sec-p rv">5 questions par jour adaptées à ton niveau. Gagne des points et monte dans le classement national !</p>
+  <div style="background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:18px;margin-bottom:14px" class="rv">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-weight:700;font-size:.93rem">⚡ Défi du jour</div>
+      <div id="quizTimer" style="font-family:'Space Mono',monospace;font-size:.78rem;color:var(--blue);background:var(--light);padding:4px 10px;border-radius:50px">01:00</div>
+    </div>
+    <div id="quizArea">
+      <div style="text-align:center;padding:16px">
+        <div style="font-size:1.8rem;margin-bottom:8px">🎯</div>
+        <div style="font-weight:700;font-size:.92rem;margin-bottom:5px">Prêt pour le défi du jour ?</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px">5 questions · 1 minute · Jusqu'à 20 points</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <select id="qLvl" style="background:#fff;border:1.5px solid var(--border);border-radius:9px;color:var(--text);padding:10px 12px;font-family:'Outfit',sans-serif;font-size:.83rem;outline:none;-webkit-appearance:none">
+            <option value="">— Ton niveau scolaire —</option>
+            <option>Maternelle</option><option>Primaire (CI-CM2)</option>
+            <option>Collège (6e-3e)</option><option>Lycée 2nde-1ère</option>
+            <option>Terminale / BAC</option><option>Université</option>
+          </select>
+          <select id="qMat" style="background:#fff;border:1.5px solid var(--border);border-radius:9px;color:var(--text);padding:10px 12px;font-family:'Outfit',sans-serif;font-size:.83rem;outline:none;-webkit-appearance:none">
+            <option value="">— Matière —</option>
+            <option>Mathématiques</option><option>Français</option>
+            <option>Sciences</option><option>Histoire-Géographie</option>
+            <option>Anglais</option><option>Culture générale</option>
+          </select>
+          <button class="gen-btn" onclick="startQuiz()">🚀 Lancer le défi !</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:16px" class="rv">
+    <div style="font-weight:700;font-size:.92rem;margin-bottom:12px">🏅 Classement National</div>
+    <div class="lb-item"><div class="lb-rank r1">1</div><div><div class="lb-name">Kossi A.</div><div class="lb-school">CEG Sainte Rita · Cotonou</div></div><div class="lb-pts">⭐ 980</div></div>
+    <div class="lb-item"><div class="lb-rank r2">2</div><div><div class="lb-name">Aminata D.</div><div class="lb-school">Lycée Béhanzin · Porto-Novo</div></div><div class="lb-pts">⭐ 945</div></div>
+    <div class="lb-item"><div class="lb-rank r3">3</div><div><div class="lb-name">Fidèle H.</div><div class="lb-school">UAC · Abomey-Calavi</div></div><div class="lb-pts">⭐ 920</div></div>
+    <div class="lb-item"><div class="lb-rank rn">4</div><div><div class="lb-name">Marie K.</div><div class="lb-school">CS Sainte Thérèse · Parakou</div></div><div class="lb-pts">⭐ 890</div></div>
+    <div class="lb-item"><div class="lb-rank rn">5</div><div><div class="lb-name">Roméo T.</div><div class="lb-school">Lycée Mathieu Bouéké · Natitingou</div></div><div class="lb-pts">⭐ 865</div></div>
+    <div id="myRankEl" style="display:none;margin-top:8px;background:var(--light);border-radius:10px;padding:10px 13px;align-items:center;gap:9px">
+      <div class="lb-rank rn" id="myRankNum">—</div>
+      <div><div class="lb-name" id="myRankName">Toi</div><div class="lb-school">Ton établissement</div></div>
+      <div class="lb-pts" id="myRankPts">⭐ 0</div>
+    </div>
+  </div>
+</section><section class="sec" id="mon-profil" style="padding:28px 0">
+  <div class="sec-tag rv">✦ Mon espace</div>
+  <h2 class="sec-h rv">Profil & Badges 🎖️</h2>
+  <div id="profileCard" style="background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:18px;margin-bottom:14px" class="rv">
+    <div style="text-align:center;padding:16px;color:var(--muted)">
+      <div style="font-size:1.8rem;margin-bottom:7px">🔐</div>
+      <div style="font-weight:600;margin-bottom:4px;font-size:.9rem">Connecte-toi pour voir ton profil</div>
+      <button class="gen-btn" style="margin-top:10px" onclick="openM('auth')">Créer mon compte gratuit</button>
+    </div>
+  </div>
+  <div style="font-weight:700;font-size:.92rem;margin-bottom:10px" class="rv">🏅 Badges à débloquer</div>
+  <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;line-height:1.6;background:var(--light);border-radius:10px;padding:10px">
+    📊 <strong style="color:var(--blue)">Règle :</strong> Obtiens une moyenne ≥ <strong style="color:var(--blue)">12/20</strong> sur au moins <strong>5 quiz</strong> dans une discipline pour débloquer le badge correspondant.
+  </div>
+  <div class="badges-grid rv" id="badgesGrid">
+    <div class="badge-item locked" id="bdg-maths"><div class="badge-ico">🧮</div><div class="badge-nm">Génie Maths<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-francais"><div class="badge-ico">📖</div><div class="badge-nm">Roi Français<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-svt"><div class="badge-ico">🔬</div><div class="badge-nm">Maître SVT<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-histgeo"><div class="badge-ico">🌍</div><div class="badge-nm">Expert Hist-Géo<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-pct"><div class="badge-ico">⚗️</div><div class="badge-nm">As de la PCT<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-anglais"><div class="badge-ico">🇬🇧</div><div class="badge-nm">Bilingue Anglais<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-allemand"><div class="badge-ico">🇩🇪</div><div class="badge-nm">Polyglotte<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-espagnol"><div class="badge-ico">🇪🇸</div><div class="badge-nm">Hispanophone<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-economie"><div class="badge-ico">💰</div><div class="badge-nm">Économiste<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-philo"><div class="badge-ico">🤔</div><div class="badge-nm">Philosophe<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-arts"><div class="badge-ico">🎭</div><div class="badge-nm">Artiste<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-eps"><div class="badge-ico">🏃</div><div class="badge-nm">Champion EPS<br><small style="color:var(--blue)">0/5 quiz</small></div></div>
+    <div class="badge-item locked" id="bdg-streak"><div class="badge-ico">🔥</div><div class="badge-nm">7 jours streak<br><small style="color:var(--blue)">0/7 jours</small></div></div>
+    <div class="badge-item locked" id="bdg-excellence"><div class="badge-ico">⭐</div><div class="badge-nm">Excellence<br><small style="color:var(--gold)">Moy ≥15/20</small></div></div>
+    <div class="badge-item locked" id="bdg-champion"><div class="badge-ico">🏆</div><div class="badge-nm">Champion Dept<br><small style="color:var(--blue)">Top 50 national</small></div></div>
+    <div class="badge-item locked" id="bdg-national"><div class="badge-ico">👑</div><div class="badge-nm">Champion National<br><small style="color:var(--gold)">Top 10 national</small></div></div>
+  </div>
+</section></div>
+
+<div class="divider"></div>
+
+<!-- SERVICES PRO -->
+<section class="sec" id="services">
+  <div class="sec-tag rv">✦ Services IA</div>
+  <h2 class="sec-h rv">Pour ta carrière<br>& ta vie</h2>
+  <p class="sec-p rv">Résultats générés par IA en quelques secondes.</p>
+  <div class="grid">
+    <div class="scard ca" onclick="openM('cv')"><div class="sc-tag t-h">🔥 N°1</div><div class="sc-ico">📄</div><div class="sc-ti">Générateur CV Pro</div><div class="sc-de">CV professionnel en 2 minutes.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Essai</span></div></div>
+    <div class="scard cb" onclick="openM('lettre')"><div class="sc-ico">✉️</div><div class="sc-ti">Lettres Pro</div><div class="sc-de">Motivation, stage, discours, email.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cc" onclick="openM('business')"><div class="sc-tag t-n">💼 Nouveau</div><div class="sc-ico">📊</div><div class="sc-ti">Business Plan</div><div class="sc-de">Plan d'affaires complet pour ton projet.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cd" onclick="openM('traduction')"><div class="sc-ico">🌍</div><div class="sc-ti">Traducteur</div><div class="sc-de">Français ↔ Anglais, Fon, Yoruba, Arabe...</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Gratuit</span></div></div>
+    <div class="scard ce" onclick="openM('sms')"><div class="sc-ico">💬</div><div class="sc-ti">SMS & WhatsApp</div><div class="sc-de">Messages parfaits pour chaque situation.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Essai</span></div></div>
+    <div class="scard cf" onclick="openM('calcul')"><div class="sc-ico">🧮</div><div class="sc-ti">Calcul Notes BAC</div><div class="sc-de">Moyenne, simulation BAC, conseils.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Gratuit</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section class="sec" id="education">
+  <div class="sec-tag rv">✦ Éducation — Programmes officiels Bénin</div>
+  <h2 class="sec-h rv">Cours & Révisions 🎓</h2>
+  <p class="sec-p rv">Résumés, formules, fiches. Du programme MEMP officiel. Maternelle → Université.</p>
+  <div class="grid">
+    <div class="scard cg" onclick="openM('maternelle')"><div class="sc-tag t-e">🌱 Éveil</div><div class="sc-ico">🍎</div><div class="sc-ti">Maternelle & CP</div><div class="sc-de">Éveil, lecture, calcul. Adapté 3-7 ans.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Gratuit</span></div></div>
+    <div class="scard cc" onclick="openM('primaire')"><div class="sc-ico">📐</div><div class="sc-ti">École Primaire</div><div class="sc-de">Maths, Français, Histoire, Sciences.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ca" onclick="openM('college')"><div class="sc-tag t-h">🏫 Collège</div><div class="sc-ico">📚</div><div class="sc-ti">Collège (6e→3e)</div><div class="sc-de">Toutes matières. Résumés + exercices corrigés.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cb" onclick="openM('lycee')"><div class="sc-tag t-h">🎯 BAC</div><div class="sc-ico">🔬</div><div class="sc-ti">Lycée & BAC</div><div class="sc-de">Séries A,B,C,D,E. Formules et méthodes.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ch" onclick="openM('technique')"><div class="sc-ico">⚙️</div><div class="sc-ti">Enseignement Technique</div><div class="sc-de">BEP, CAP, BAC Technique.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cd" onclick="openM('superieur')"><div class="sc-tag t-n">🎓 Université</div><div class="sc-ico">🏛️</div><div class="sc-ti">Université & Grandes Écoles</div><div class="sc-de">FASEG, FLASH, Médecine, EPAC, ENAM...</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CULTURE -->
+<section class="sec" id="culture">
+  <div class="sec-tag rv">✦ Culture & Patrimoine béninois</div>
+  <h2 class="sec-h rv">L'âme du Bénin 🇧🇯</h2>
+  <div class="grid">
+    <div class="scard ce" onclick="openM('panegyrique')"><div class="sc-tag t-c">👑 Exclusif</div><div class="sc-ico">👑</div><div class="sc-ti">Panégyriques Familiaux</div><div class="sc-de">Oriki Yoruba / Yèkèyèkè Fon de ta famille.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ca" onclick="openM('nomfamille')"><div class="sc-tag t-c">🌿 Racines</div><div class="sc-ico">🏷️</div><div class="sc-ti">Signification des Noms</div><div class="sc-de">Étymologie de ton nom béninois.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cg" onclick="openM('proverbes')"><div class="sc-tag t-c">🧿 Sagesse</div><div class="sc-ico">🧿</div><div class="sc-ti">Proverbes Africains</div><div class="sc-de">Fon, Yoruba. Signification et contexte.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Essai</span></div></div>
+    <div class="scard cd" onclick="openM('quiz')"><div class="sc-tag t-e">🗺️ Puzzle</div><div class="sc-ico">🗺️</div><div class="sc-ti">Quiz Carte Bénin</div><div class="sc-de">Départements→Communes→Villages→Fleuves.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ce" onclick="openM('horoscope')"><div class="sc-tag t-h">⭐ Tendance</div><div class="sc-ico">🔮</div><div class="sc-ti">Horoscope Personnalisé</div><div class="sc-de">Amour, travail, chance. Message africain.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Essai</span></div></div>
+    <div class="scard cg" onclick="openM('coach')"><div class="sc-ico">💡</div><div class="sc-ti">Coach de Vie IA</div><div class="sc-de">Amour, famille, études, entrepreneuriat.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METIERS -->
+<section class="sec" id="metiers">
+  <div class="sec-tag rv">✦ Métiers & Artisanat</div>
+  <h2 class="sec-h rv">Tous les métiers 🔧</h2>
+  <div class="grid">
+    <div class="scard cc" onclick="openM('couture')"><div class="sc-ico">🧵</div><div class="sc-ti">Couture & Mode</div><div class="sc-de">Outils illustrés, patronage, techniques.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ch" onclick="openM('maconnerie')"><div class="sc-ico">🏗️</div><div class="sc-ti">Maçonnerie & Architecture</div><div class="sc-de">Construction, plans, normes béninoises.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cg" onclick="openM('electricite')"><div class="sc-ico">⚡</div><div class="sc-ti">Électricité & Informatique</div><div class="sc-de">Schémas, dépannage PC/Android.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cb" onclick="openM('mecanique')"><div class="sc-ico">🔧</div><div class="sc-ti">Mécanique Auto-Moto</div><div class="sc-de">Tous modèles. Diagnostics et réparations.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cd" onclick="openM('agriculture')"><div class="sc-tag t-e">🌱 Éco</div><div class="sc-ico">🌾</div><div class="sc-ti">Agriculture Écologique</div><div class="sc-de">Cultures adaptées, bio, irrigation.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ce" onclick="openM('beaute')"><div class="sc-ico">💇</div><div class="sc-ti">Coiffure & Beauté</div><div class="sc-de">Coiffure afro, soins, mannequinat.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ca" onclick="openM('menuiserie')"><div class="sc-ico">🪵</div><div class="sc-ti">Menuiserie & Soudure</div><div class="sc-de">Bois, métaux, outils illustrés.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cc" onclick="openM('plomberie')"><div class="sc-ico">🔩</div><div class="sc-ti">Plomberie & Carrelage</div><div class="sc-de">Sanitaires, carrelage, peinture.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NATURE -->
+<section class="sec" id="nature">
+  <div class="sec-tag rv">✦ Faune & Flore</div>
+  <h2 class="sec-h rv">La nature du Bénin 🌿</h2>
+  <div class="grid">
+    <div class="scard cd" onclick="openM('faune')"><div class="sc-tag t-e">🦁 Terrestre</div><div class="sc-ico">🦁</div><div class="sc-ti">Faune Terrestre</div><div class="sc-de">Animaux du Bénin, espèces endémiques.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cc" onclick="openM('aquatique')"><div class="sc-tag t-n">🐟 Aquatique</div><div class="sc-ico">🐟</div><div class="sc-ti">Faune Aquatique</div><div class="sc-de">Lac Nokoué, Ouémé, Atlantique.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard cd" onclick="openM('flore')"><div class="sc-ico">🌺</div><div class="sc-ti">Flore & Plantes Médicinales</div><div class="sc-de">Plantes du Bénin, propriétés médicinales.</div><div class="sc-badges"><span class="bdg bdg-s">💰 Abonnés</span></div></div>
+    <div class="scard ch" onclick="openM('geographie')"><div class="sc-ico">🏞️</div><div class="sc-ti">Géographie & Cours d'Eau</div><div class="sc-de">Fleuves, routes nationales, reliefs.</div><div class="sc-badges"><span class="bdg bdg-f">🆓 Essai</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABONNEMENT -->
+<section class="sec" id="abonnement">
+  <div class="sec-tag rv">✦ Abonnement</div>
+  <h2 class="sec-h rv">Choisis ton accès</h2>
+  <p class="sec-p rv">Un abonnement pour tout. Payable dans toutes les devises.</p>
+  <div class="sub-grid">
+    <div class="sub-card" onclick="openM('auth')">
+      <div class="sub-ico">🆓</div><div class="sub-name">Essai Gratuit</div>
+      <div class="sub-price">0</div><div class="sub-period">48 heures</div>
+      <ul class="sub-feats"><li>Tous les services</li><li>Sans carte bancaire</li><li>Compte créé</li></ul>
+      <button class="sub-btn out">Commencer</button>
+    </div>
+    <div class="sub-card feat">
+      <div class="sub-badge">⭐ Populaire</div>
+      <div class="sub-ico">🏆</div><div class="sub-name">Mensuel</div>
+      <div class="sub-price">500 FCFA</div><div class="sub-period">30 jours · Auto-expiration</div>
+      <ul class="sub-feats"><li>Accès illimité</li><li>Tous pays & devises</li><li>MTN · Moov · Celtiis</li><li>Rappel 72h avant</li><li>Parrainage -20%</li></ul>
+      <button class="sub-btn" onclick="openM('subscribe')">S'abonner</button>
+    </div>
+  </div>
+  <div style="background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);padding:16px;margin-top:12px" class="rv">
+    <div style="font-weight:700;font-size:.9rem;margin-bottom:5px">💱 Toutes les devises</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
+      <div style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇧🇯 FCFA<div style="color:var(--green);font-size:.68rem;margin-top:2px;font-weight:700">500 F</div></div>
+      <div style="background:var(--light);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇪🇺 EUR<div style="color:var(--muted);font-size:.68rem;margin-top:2px">≈ 0.76€</div></div>
+      <div style="background:var(--light);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇺🇸 USD<div style="color:var(--muted);font-size:.68rem;margin-top:2px">≈ $0.83</div></div>
+      <div style="background:var(--light);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇬🇧 GBP<div style="color:var(--muted);font-size:.68rem;margin-top:2px">≈ £0.65</div></div>
+      <div style="background:var(--light);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇨🇦 CAD<div style="color:var(--muted);font-size:.68rem;margin-top:2px">≈ $1.13</div></div>
+      <div style="background:var(--light);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;font-size:.72rem">🇨🇭 CHF<div style="color:var(--muted);font-size:.68rem;margin-top:2px">≈ 0.73Fr</div></div>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,rgba(245,158,11,.07),rgba(239,68,68,.05));border:1.5px solid rgba(245,158,11,.18);border-radius:var(--r2);padding:16px;margin-top:11px" class="rv">
+    <div style="font-weight:700;font-size:.9rem;margin-bottom:4px">🎁 Code de parrainage</div>
+    <p style="font-size:.76rem;color:var(--muted);margin-bottom:11px;line-height:1.7">Partage ton code. Un ami s'abonne = <strong style="color:var(--gold)">-20% sur ton mois suivant</strong>.</p>
+    <div style="background:#fff;border:2px dashed rgba(245,158,11,.25);border-radius:10px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:9px">
+      <div style="font-family:'Space Mono',monospace;font-size:.95rem;color:var(--gold);font-weight:700;letter-spacing:2px" id="refDisplay">ZNA-????</div>
+      <button onclick="copyRef()" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.22);border-radius:7px;color:var(--gold);padding:5px 10px;font-size:.68rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600">Copier</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="comment">
+  <div class="sec-tag rv">✦ Paiement anonyme</div>
+  <h2 class="sec-h rv">Comment payer ? 🔐</h2>
+  <p class="sec-p rv">Ton identité est protégée. Les utilisateurs voient uniquement <strong style="color:var(--blue)">"Zenith Nova Academy"</strong>.</p>
+  <div class="how-grid">
+    <div class="how-c rv"><div class="how-n">01</div><div class="how-ico">📱</div><h4>Entre ton numéro</h4><p>Tu entres TON numéro. Aucun numéro destinataire affiché.</p></div>
+    <div class="how-c rv"><div class="how-n">02</div><div class="how-ico">📲</div><h4>Notification push</h4><p>Demande de paiement sur ton téléphone.</p></div>
+    <div class="how-c rv"><div class="how-n">03</div><div class="how-ico">🔐</div><h4>PIN Mobile Money</h4><p>Confirme avec ton PIN. Fonds insuffisants ? Ton opérateur t'informe.</p></div>
+    <div class="how-c rv"><div class="how-n">04</div><div class="how-ico">⚡</div><h4>Accès immédiat</h4><p>30 jours d'accès illimité activés.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="sec-tag rv">✦ Témoignages</div>
+  <h2 class="sec-h rv">Ils adorent ZNA 🇧🇯</h2>
+  <div class="t-grid">
+    <div class="t-c rv"><div class="t-stars">★★★★★</div><p class="t-tx">"Le panégyrique de ma famille m'a ému aux larmes. Je ne savais pas tout ça sur mes ancêtres !"</p><div class="t-au"><div class="t-av" style="background:var(--g1)">F</div><div><div class="t-nm">Fidèle A.</div><div class="t-ct">Abomey 🇧🇯</div></div></div></div>
+    <div class="t-c rv"><div class="t-stars">★★★★★</div><p class="t-tx">"CV fait en 3 minutes. J'ai eu mon stage la semaine d'après. App vraiment incroyable !"</p><div class="t-au"><div class="t-av" style="background:var(--g3)">K</div><div><div class="t-nm">Kossi M.</div><div class="t-ct">Cotonou 🇧🇯</div></div></div></div>
+    <div class="t-c rv"><div class="t-stars">★★★★★</div><p class="t-tx">"Je suis en France. ZNA me connecte à ma culture béninoise chaque jour !"</p><div class="t-au"><div class="t-av" style="background:var(--g2)">A</div><div><div class="t-nm">Aminata D.</div><div class="t-ct">Paris 🇫🇷</div></div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">
+    <div class="f-zbox"><span class="f-z">Z</span></div>
+    <div class="f-name">Zenith Nova Academy</div>
+  </div>
+  <p>La Plateforme Éducative & Compétitive N°1 du Bénin</p>
+  <p>MTN MoMo · Moov Money · Celtiis · Visa/Mastercard</p>
+  <p>Compatible tous téléphones · Android · iPhone · Téléphone à touches</p>
+  <p style="margin-top:9px;font-size:.67rem">© 2025 Zenith Nova Academy · Tous droits réservés · Bénin 🇧🇯</p>
+  <div class="f-tags">
+    <div class="f-tag ft-b">⚡ IA Intégrée</div>
+    <div class="f-tag ft-g">🏆 Compétition Nationale</div>
+    <div class="f-tag ft-b">🔐 Paiement Anonyme</div>
+    <div class="f-tag ft-g">📱 Tous Téléphones</div>
+  </div>
+</footer>
+
+<div class="toast" id="toastEl"></div>
+<div id="modRoot"></div>
+<script>
+// ══════════════════════════════════════
+// ZENITH NOVA ACADEMY — JavaScript
+// ══════════════════════════════════════
+
+// PARTICLES
+(function(){
+  var c=document.createElement('div');
+  c.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:0';
+  document.body.appendChild(c);
+  ['#0057B7','#00BFFF','#F59E0B','#10B981','#EF4444'].forEach(function(col){
+    for(var i=0;i<3;i++){
+      var p=document.createElement('div');
+      p.style.cssText='position:absolute;border-radius:50%;left:'+Math.random()*100+'%;'+
+        'width:'+(Math.random()*2+1)+'px;height:'+(Math.random()*2+1)+'px;'+
+        'background:'+col+';animation:ptU '+(Math.random()*14+7)+'s '+
+        (Math.random()*-18)+'s linear infinite;opacity:'+(Math.random()*.3+.05);
+      c.appendChild(p);
+    }
+  });
+  var s=document.createElement('style');
+  s.textContent='@keyframes ptU{0%{transform:translateY(100vh);opacity:0}5%{opacity:.5}90%{opacity:.2}100%{transform:translateY(-5vh);opacity:0}}';
+  document.head.appendChild(s);
+})();
+
+// REVEAL
+document.querySelectorAll('.rv').forEach(function(el){
+  new IntersectionObserver(function(e){
+    e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('on');});
+  },{threshold:.06,rootMargin:'0px 0px 100px 0px'}).observe(el);
+});
+
+// NAVIGATION
+function goSec(id){
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+  closeNav();
+}
+function closeNav(){
+  document.getElementById('navEl').classList.remove('open');
+  document.getElementById('menuBtn').textContent='☰';
+}
+function toggleNav(){
+  var n=document.getElementById('navEl'),b=document.getElementById('menuBtn');
+  var o=n.classList.toggle('open');
+  b.textContent=o?'✕':'☰';
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('header')&&!e.target.closest('.nav'))closeNav();
+});
+
+// LANGUAGES
+var LANGS={
+  fr:{badge:'🎓 La Plateforme Éducative N°1 du Bénin',t1:'Apprends,',t2:'comprends & réussis !',sub:'La première plateforme de <b>compétition scolaire nationale</b> du Bénin.'},
+  en:{badge:'🎓 N°1 Educational Platform — Benin',t1:'Learn,',t2:'comprends & succeed!',sub:'The first national <b>academic competition</b> platform of Benin.'},
+  fon:{badge:'🎓 Sunsun Kplɔ́n N°1 — Bénin',t1:'Kplɔ́n,',t2:'zan kpɔ & hù!',sub:'Sunsun kplɔ́n tɔn nukɔntɔn <b>Bénin</b> mɛ.'},
+  yo:{badge:'🎓 Ile-Iwe N°1 — Benin',t1:'Kọ,',t2:'dije & ṣẹgun!',sub:'Pẹpẹ idije ẹkọ <b>orilẹ-ede</b> akọkọ ni Benin.'}
+};
+function setLang(l,btn){
+  var d=LANGS[l]||LANGS.fr;
+  document.getElementById('hBadge').textContent=d.badge;
+  document.getElementById('hT1').textContent=d.t1;
+  document.getElementById('hT2').textContent=d.t2;
+  document.getElementById('hSub').innerHTML=d.sub;
+  document.querySelectorAll('.lang-p').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  showToast('🌍 Langue changée !');
+  closeNav();
+}
+
+// USER STATE
+var USER=null;
+try{USER=JSON.parse(localStorage.getItem('zna_user')||'null');}catch(e){}
+var TRIAL=parseInt(localStorage.getItem('zna_trial')||'0');
+var SUBEXP=parseInt(localStorage.getItem('zna_sub')||'0');
+var POINTS=parseInt(localStorage.getItem('zna_pts')||'0');
+var STREAK=parseInt(localStorage.getItem('zna_streak')||'0');
+var BADGES=[];
+try{BADGES=JSON.parse(localStorage.getItem('zna_badges')||'[]');}catch(e){}
+
+// DISCIPLINE SCORES TRACKING
+var DISC_SCORES={};
+try{DISC_SCORES=JSON.parse(localStorage.getItem('zna_disc')||'{}');}catch(e){}
+
+// Map matiere to badge id
+var MATIERE_BADGE={
+  'Mathematiques':'maths','Français':'francais',
+  'Histoire-Geographie':'histgeo','SVT (Sciences de la Vie et de la Terre)':'svt',
+  'PCT (Physique-Chimie-Technologie)':'pct','Anglais':'anglais',
+  'Allemand':'allemand','Espagnol':'espagnol',
+  'Economie':'economie','Philosophie':'philo',
+  'EPS (Education Physique et Sportive)':'eps',
+  'Musique':'arts','Theatre & Arts':'arts','Danse':'arts',
+  'Culture generale & Citoyennete':'general'
+};
+
+function saveDiscScore(matiere, scoreSur20){
+  var key=matiere.replace(/[^a-zA-Z]/g,'').toLowerCase().slice(0,8);
+  if(!DISC_SCORES[key])DISC_SCORES[key]={total:0,count:0,scores:[]};
+  DISC_SCORES[key].scores.push(scoreSur20);
+  DISC_SCORES[key].total+=scoreSur20;
+  DISC_SCORES[key].count++;
+  DISC_SCORES[key].avg=Math.round((DISC_SCORES[key].total/DISC_SCORES[key].count)*10)/10;
+  localStorage.setItem('zna_disc',JSON.stringify(DISC_SCORES));
+  checkDiscBadges(matiere, key);
+}
+
+function checkDiscBadges(matiere, key){
+  var d=DISC_SCORES[key];
+  if(!d)return;
+  // Need at least 5 quizzes with average >= 12/20
+  if(d.count>=5&&d.avg>=12){
+    // Find badge id
+    var normalized=matiere.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    for(var m in MATIERE_BADGE){
+      var mn=m.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      if(normalized.indexOf(mn.split(' ')[0])>=0||mn.indexOf(normalized.split(' ')[0])>=0){
+        awardBadgeById(MATIERE_BADGE[m]);
+        break;
+      }
+    }
+  }
+  // Excellence badge: average >= 15 across all disciplines
+  var allKeys=Object.keys(DISC_SCORES);
+  if(allKeys.length>=3){
+    var totalAvg=0,cnt=0;
+    allKeys.forEach(function(k){if(DISC_SCORES[k].count>=3){totalAvg+=DISC_SCORES[k].avg;cnt++;}});
+    if(cnt>=3&&(totalAvg/cnt)>=15)awardBadgeById('excellence');
+  }
+  updateBadgesDisplay();
+}
+
+function awardBadgeById(id){
+  if(BADGES.indexOf(id)>=0)return;
+  BADGES.push(id);
+  localStorage.setItem('zna_badges',JSON.stringify(BADGES));
+  var names={maths:'Génie des Maths',francais:'Roi du Français',svt:'Maître SVT',
+    histgeo:'Expert Hist-Géo',pct:'As de la PCT',anglais:'Bilingue Anglais',
+    allemand:'Polyglotte',espagnol:'Hispanophone',economie:'Économiste',
+    philo:'Philosophe',arts:'Artiste',eps:'Champion EPS',
+    streak:'7 jours streak',excellence:'Excellence',champion:'Champion Dept',national:'Champion National'};
+  showToast('🏅 Badge débloqué : '+( names[id]||id)+' !',4000);
+  updateBadgesDisplay();
+}
+
+function isTrial(){return USER&&TRIAL&&(Date.now()-TRIAL)<172800000;}
+function isSub(){
+  if(!USER||!SUBEXP)return false;
+  if(Date.now()>SUBEXP){localStorage.removeItem('zna_sub');SUBEXP=0;return false;}
+  var rem=SUBEXP-Date.now();
+  if(rem<259200000&&!localStorage.getItem('zna_warned')){
+    localStorage.setItem('zna_warned','1');
+    setTimeout(function(){showToast('⚠️ Abonnement expire dans 72h !');},2000);
+  }
+  return true;
+}
+function canAccess(){return isTrial()||isSub();}
+
+function addPoints(pts,msg){
+  POINTS+=pts;
+  localStorage.setItem('zna_pts',POINTS);
+  showToast('+'+pts+' points ! '+msg);
+  updateProfile();
+}
+
+function getRef(){
+  if(!USER)return'ZNA-????';
+  var c=localStorage.getItem('zna_ref');
+  if(!c){c='ZNA-'+(USER.u.toUpperCase().slice(0,3)+Math.floor(1000+Math.random()*9000));localStorage.setItem('zna_ref',c);}
+  return c;
+}
+
+function updateUI(){
+  document.getElementById('refDisplay').textContent=getRef();
+  var nu=document.getElementById('navUser');
+  if(nu)nu.style.display=USER?'flex':'none';
+  updateProfile();
+  updateBadges();
+  updateMyRank();
+}
+
+function updateProfile(){
+  if(!USER)return;
+  var levels=[
+    {min:0,name:'Découverte',ico:'🌱'},{min:50,name:'Débutant',ico:'📚'},
+    {min:150,name:'Apprenant',ico:'✏️'},{min:350,name:'Confirmé',ico:'🎯'},
+    {min:700,name:'Expert',ico:'⚡'},{min:1200,name:'Maître',ico:'🔥'},
+    {min:2000,name:'Ambassadeur',ico:'🌟'},{min:3500,name:'Champion',ico:'👑'}
+  ];
+  var lv=levels[0];
+  for(var i=0;i<levels.length;i++){if(POINTS>=levels[i].min)lv=levels[i];}
+  var next=levels[levels.length-1];
+  for(var i=0;i<levels.length;i++){if(levels[i].min>POINTS){next=levels[i];break;}}
+  var prog=next.min>0?Math.min(100,Math.round((POINTS/next.min)*100)):100;
+  var pc=document.getElementById('profileCard');
+  if(!pc)return;
+  pc.innerHTML='<div style="display:flex;align-items:center;gap:12px;margin-bottom:13px">'+
+    '<div style="width:52px;height:52px;border-radius:50%;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:#fff;flex-shrink:0">'+USER.u.charAt(0).toUpperCase()+'</div>'+
+    '<div style="flex:1"><div style="font-weight:700;font-size:1rem">'+USER.u+'</div>'+
+    '<div style="font-size:.72rem;color:var(--muted)">'+lv.ico+' '+lv.name+'</div></div>'+
+    '<div style="text-align:right"><div class="pts-badge">⭐ '+POINTS+' pts</div>'+
+    '<div style="font-size:.63rem;color:var(--muted);margin-top:3px">🔥 '+STREAK+' jours</div></div></div>'+
+    '<div style="font-size:.73rem;color:var(--muted);margin-bottom:3px">Progression vers '+next.name+'</div>'+
+    '<div class="progress-bar"><div class="progress-fill" style="width:'+prog+'%"></div></div>'+
+    '<div style="font-size:.68rem;color:var(--blue);text-align:right;margin-bottom:11px">'+POINTS+' / '+next.min+' pts</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;text-align:center">'+
+    '<div style="background:var(--light);border-radius:9px;padding:9px"><div style="font-weight:700;font-size:1rem;color:var(--blue)">'+POINTS+'</div><div style="font-size:.62rem;color:var(--muted)">Points</div></div>'+
+    '<div style="background:var(--light);border-radius:9px;padding:9px"><div style="font-weight:700;font-size:1rem;color:var(--red)">'+STREAK+'</div><div style="font-size:.62rem;color:var(--muted)">Streak</div></div>'+
+    '<div style="background:var(--light);border-radius:9px;padding:9px"><div style="font-weight:700;font-size:1rem;color:var(--gold)">'+BADGES.length+'</div><div style="font-size:.62rem;color:var(--muted)">Badges</div></div>'+
+    '</div>';
+}
+
+function updateBadges(){
+  updateBadgesDisplay();
+}
+function updateBadgesDisplay(){
+  BADGES.forEach(function(id){
+    var el=document.getElementById('bdg-'+id);
+    if(el){el.classList.remove('locked');el.classList.add('earned');}
+  });
+  // Update streak badge
+  if(STREAK>=7){
+    var sb=document.getElementById('bdg-streak');
+    if(sb){sb.classList.remove('locked');sb.classList.add('earned');}
+    if(BADGES.indexOf('streak')< 0)awardBadgeById('streak');
+  }
+  // Update progress on badges
+  Object.keys(DISC_SCORES).forEach(function(key){
+    var d=DISC_SCORES[key];
+    // Find matching badge element and update count
+  });
+}
+
+function updateMyRank(){
+  if(!USER)return;
+  var mr=document.getElementById('myRankEl');
+  var mn=document.getElementById('myRankName');
+  var mp=document.getElementById('myRankPts');
+  if(mr&&mn&&mp){
+    mr.style.display='flex';
+    mn.textContent=USER.u;
+    mp.textContent='⭐ '+POINTS;
+  }
+}
+
+function showProfile(){
+  var t=isTrial()?'Essai: '+Math.ceil((172800000-(Date.now()-TRIAL))/3600000)+'h':
+    isSub()?'Abonné':'Non abonné';
+  showToast('👤 '+USER.u+' · '+t);
+  closeNav();
+}
+
+// TOAST
+function showToast(m){
+  var t=document.getElementById('toastEl');
+  t.textContent=m;t.classList.add('on');
+  setTimeout(function(){t.classList.remove('on');},2500);
+}
+
+// COPY REF
+function copyRef(){
+  if(!USER){openM('auth');return;}
+  var url=location.href.split('?')[0]+'?ref='+getRef();
+  if(navigator.clipboard)navigator.clipboard.writeText(url).catch(function(){});
+  showToast('✓ Lien de parrainage copié !');
+}
+
+// ══════════════════════════════════════
+// SERVICE DEFINITIONS
+// ══════════════════════════════════════
+var SVCS={
+  cv:{lb:'CV Professionnel',ic:'📄',cl:'rgba(0,87,183,.12)',
+    fl:[{id:'cv-n',t:'i',ph:'Ton nom complet'},{id:'cv-p',t:'i',ph:'Poste recherché'},
+        {id:'cv-e',t:'i',ph:'Expériences professionnelles'},{id:'cv-f',t:'i',ph:'Formation'},
+        {id:'cv-c',t:'i',ph:'Compétences clés'},{id:'cv-l',t:'i',ph:'Langues parlées'}]},
+  lettre:{lb:'Lettre Professionnelle',ic:'✉️',cl:'rgba(239,68,68,.12)',
+    fl:[{id:'lt-y',t:'s',ph:'Type',op:['Lettre de motivation','Demande de stage','Lettre de démission','Demande attestation','Email professionnel','Discours']},
+        {id:'lt-n',t:'i',ph:'Ton nom'},{id:'lt-d',t:'i',ph:'Destinataire'},{id:'lt-c',t:'ta',ph:'Contexte...'}]},
+  business:{lb:'Business Plan',ic:'📊',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'bz-n',t:'i',ph:'Nom du projet'},{id:'bz-s',t:'s',ph:'Secteur',op:['Commerce','Agriculture','Restauration','Informatique','Couture','Transport','Sante','Education','Artisanat']},
+        {id:'bz-d',t:'ta',ph:'Decris ton idee...'},{id:'bz-b',t:'i',ph:'Budget de depart'}]},
+  traduction:{lb:'Traduction',ic:'🌍',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'tr-t',t:'ta',ph:'Texte a traduire...'},{id:'tr-l',t:'s',ph:'Langue cible',op:['Anglais','Fon','Yoruba','Espagnol','Arabe','Portugais','Allemand']}]},
+  sms:{lb:'SMS & WhatsApp',ic:'💬',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'sm-t',t:'s',ph:'Type',op:['Seduction','Reconciliation','Excuses','Condoleances','Felicitations mariage','Anniversaire','Rupture']},
+        {id:'sm-p',t:'i',ph:'Prenom de la personne'},{id:'sm-c',t:'ta',ph:'Contexte...'}]},
+  calcul:{lb:'Calcul de Notes',ic:'🧮',cl:'rgba(139,92,246,.12)',
+    fl:[{id:'ca-n',t:'ta',ph:'Notes:\nMaths: 14 (coef 4)\nFrancais: 12 (coef 3)'},{id:'ca-t',t:'s',ph:'Analyse',op:['Moyenne generale','Simulation BAC','Conseils amelioration']}]},
+  maternelle:{lb:'Maternelle & CP',ic:'🍎',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'ma-s',t:'s',ph:'Matiere',op:['Eveil & Decouverte','Lecture & Ecriture','Calcul de base','Expression orale','Dessin & Creativite']},{id:'ma-t',t:'i',ph:'Sujet precis'}]},
+  primaire:{lb:'Ecole Primaire',ic:'📐',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'pr-m',t:'s',ph:'Matiere',op:['Mathematiques','Francais','Histoire-Geographie','Sciences','EDHC','Anglais']},
+        {id:'pr-s',t:'i',ph:'Sujet precis'},{id:'pr-n',t:'s',ph:'Niveau',op:['CE1','CE2','CM1','CM2']}]},
+  college:{lb:'Cours College',ic:'📚',cl:'rgba(0,87,183,.12)',
+    fl:[{id:'co-m',t:'s',ph:'Matiere',op:['Mathematiques','Physique-Chimie','SVT','Francais','Histoire-Geo','Anglais','EDHC']},
+        {id:'co-s',t:'i',ph:'Sujet precis'},{id:'co-n',t:'s',ph:'Niveau',op:['6eme','5eme','4eme','3eme']}]},
+  lycee:{lb:'Lycee & BAC',ic:'🔬',cl:'rgba(239,68,68,.12)',
+    fl:[{id:'ly-s',t:'s',ph:'Serie BAC',op:['Serie A (Lettres)','Serie B (Economie)','Serie C (Maths)','Serie D (Sciences)','Serie E (Technique)']},
+        {id:'ly-m',t:'s',ph:'Matiere',op:['Mathematiques','Physique-Chimie','SVT','Philosophie','Histoire-Geo','Francais','Anglais']},
+        {id:'ly-t',t:'i',ph:'Sujet precis'}]},
+  technique:{lb:'Enseignement Technique',ic:'⚙️',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'te-f',t:'s',ph:'Filiere',op:['BEP Electricite','BEP Menuiserie','BEP Mecanique','CAP Comptabilite','BAC Technique','BTS Informatique']},
+        {id:'te-s',t:'i',ph:'Module ou sujet...'}]},
+  superieur:{lb:'Universite & Grandes Ecoles',ic:'🏛️',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'su-f',t:'s',ph:'Faculte',op:['FASEG','FLASH','FSS Medecine','Pharmacie','FAST Sciences','EPAC','ENAM','Sciences Juridiques','INJEPS']},
+        {id:'su-m',t:'i',ph:'Matiere'},{id:'su-s',t:'i',ph:'Sujet precis'}]},
+  panegyrique:{lb:'Panegirique Familial',ic:'👑',cl:'rgba(245,158,11,.12)',
+    ds:"Le panegirique (Oriki / Yekeyeke) est l'eloge ancestral de ta famille.",
+    fl:[{id:'pa-n',t:'i',ph:'Ton nom de famille'},{id:'pa-e',t:'s',ph:'Groupe ethnique',op:['Fon','Yoruba / Nago','Adja','Bariba','Dendi','Goun','Mahi','Ottamari']},{id:'pa-r',t:'i',ph:"Region d'origine"}]},
+  nomfamille:{lb:'Signification du Nom',ic:'🏷️',cl:'rgba(0,87,183,.12)',
+    ds:"Decouvre l'origine et la signification de ton nom de famille beninois.",
+    fl:[{id:'nf-f',t:'i',ph:'Nom de famille'},{id:'nf-p',t:'i',ph:'Prenom'},{id:'nf-o',t:'s',ph:'Origine',op:['Fon','Yoruba / Nago','Adja','Bariba','Goun','Mahi','Je ne sais pas']}]},
+  proverbes:{lb:'Proverbes Africains',ic:'🧿',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'pv-t',t:'s',ph:'Theme',op:['Famille','Amour & Mariage','Travail','Sagesse','Courage','Verite','Vie & Mort']},{id:'pv-l',t:'s',ph:'Langue',op:['Fon (Benin)','Yoruba','Africain general']}]},
+  quiz:{lb:'Quiz Carte Benin',ic:'🗺️',cl:'rgba(239,68,68,.12)',
+    ds:'Quiz progressif sur la geographie du Benin. Du plus simple au plus complexe !',
+    fl:[{id:'qz-t',t:'s',ph:'Niveau',op:['Niveau 1 - Les 12 Departements','Niveau 2 - Les 77 Communes','Niveau 3 - Arrondissements & Villages','Niveau 4 - Fleuves & Cours eau','Niveau 5 - Routes nationales','Niveau 6 - Cartes Afrique','Niveau 7 - Cartes Monde']},{id:'qz-p',t:'i',ph:'Ton pseudo'}]},
+  horoscope:{lb:'Horoscope Personnalise',ic:'🔮',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'ho-s',t:'s',ph:'Ton signe',op:['Belier','Taureau','Gemeaux','Cancer','Lion','Vierge','Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons']},{id:'ho-p',t:'i',ph:'Ton prenom'}]},
+  coach:{lb:'Coach de Vie IA',ic:'💡',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'coa-d',t:'s',ph:'Domaine',op:['Amour & Relations','Orientation scolaire','Confiance en soi','Famille','Finance','Sante mentale','Entrepreneuriat']},{id:'coa-q',t:'ta',ph:'Ta question...'}]},
+  couture:{lb:'Couture & Mode',ic:'🧵',cl:'rgba(0,87,183,.12)',
+    fl:[{id:'ct-s',t:'s',ph:'Sujet',op:['Outils illustres','Patronage','Couture africaine','Couture internationale','Broderie','Creation modeles']},{id:'ct-q',t:'ta',ph:'Question specifique...'}]},
+  maconnerie:{lb:'Maconnerie & Architecture',ic:'🏗️',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'mc-s',t:'s',ph:'Sujet',op:['Outils du macon','Techniques fondation','Construction murs','Plans maison','Materiaux Benin','Normes beninois']},{id:'mc-q',t:'ta',ph:'Question...'}]},
+  electricite:{lb:'Electricite & Informatique',ic:'⚡',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'el-s',t:'s',ph:'Domaine',op:["Outils electricien","Schemas electriques","Installation domestique","Depannage PC & Android","Reseaux informatiques"]},{id:'el-q',t:'ta',ph:'Probleme...'}]},
+  mecanique:{lb:'Mecanique Auto-Moto',ic:'🔧',cl:'rgba(239,68,68,.12)',
+    fl:[{id:'me-s',t:'s',ph:'Type',op:['Outils mecanicien','Moteur essence','Moteur diesel','Freinage','Electronique auto','Mecanique moto','Diagnostic pannes']},
+        {id:'me-m',t:'i',ph:'Modele vehicule'},{id:'me-q',t:'ta',ph:'Panne ou question...'}]},
+  agriculture:{lb:'Agriculture Ecologique',ic:'🌾',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'ag-s',t:'s',ph:'Sujet',op:['Cultures Benin','Agriculture bio','Gestion sols','Irrigation','Elevage durable','Transformation agricole']},{id:'ag-q',t:'ta',ph:'Question...'}]},
+  beaute:{lb:'Coiffure & Beaute',ic:'💇',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'be-s',t:'s',ph:'Domaine',op:['Coiffure afro','Soins cheveux','Maquillage','Mannequinat','Soins peau','Creer salon']},{id:'be-q',t:'ta',ph:'Question...'}]},
+  menuiserie:{lb:'Menuiserie & Soudure',ic:'🪵',cl:'rgba(0,87,183,.12)',
+    fl:[{id:'mn-s',t:'s',ph:'Domaine',op:['Outils menuisier','Travail bois','Meubles','Outils soudeur','Soudure TIG/MIG','Travail metaux']},{id:'mn-q',t:'ta',ph:'Question...'}]},
+  plomberie:{lb:'Plomberie & Carrelage',ic:'🔩',cl:'rgba(0,191,255,.12)',
+    fl:[{id:'pl-s',t:'s',ph:'Domaine',op:['Outils plombier','Installation sanitaire','Reparation fuites','Pose carrelage','Peinture decorative']},{id:'pl-q',t:'ta',ph:'Question...'}]},
+  faune:{lb:'Faune Terrestre',ic:'🦁',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'fa-p',t:'s',ph:'Region',op:['Benin','Parc Pendjari','Parc W','Afrique Ouest','Afrique','Monde']},
+        {id:'fa-a',t:'i',ph:'Animal (ex: Elephant, Lion...)'},{id:'fa-s',t:'s',ph:'Info',op:['Description & habitat','Comportement','Conservation','Classification']}]},
+  aquatique:{lb:'Faune Aquatique',ic:'🐟',cl:'rgba(0,87,183,.12)',
+    fl:[{id:'aq-p',t:'s',ph:'Milieu',op:['Lac Nokoue','Fleuve Oueme','Fleuve Mono','Atlantique Benin','Fleuve Niger']},
+        {id:'aq-a',t:'i',ph:'Espece (ex: Tilapia...)'},{id:'aq-s',t:'s',ph:'Info',op:['Description','Valeur nutritionnelle','Especes protegees','Aquaculture']}]},
+  flore:{lb:'Flore & Plantes Medicinales',ic:'🌺',cl:'rgba(16,185,129,.12)',
+    fl:[{id:'fl-p',t:'s',ph:'Region',op:['Benin','Zone Nord','Zone Sud','Forets sacrees','Afrique Ouest']},
+        {id:'fl-n',t:'i',ph:'Plante (ex: Moringa, Baobab...)'},{id:'fl-s',t:'s',ph:'Info',op:['Description','Proprietes medicinales','Culture','Valeur economique']}]},
+  geographie:{lb:'Geographie & Cours Eau',ic:'🏞️',cl:'rgba(245,158,11,.12)',
+    fl:[{id:'ge-s',t:'s',ph:'Sujet',op:['Fleuves & rivieres','Routes nationales','Reliefs & paysages','Regions naturelles','Villes & communes','Geographie africaine']},
+        {id:'ge-q',t:'ta',ph:'Question precise...'}]}
+};
+
+// PROMPTS
+function gv(id){var el=document.getElementById(id);return el?el.value:'';}
+function buildPrompt(id){
+  var P={
+    cv:'Expert RH Benin. CV professionnel.\nNom: '+gv('cv-n')+' | Poste: '+gv('cv-p')+' | Exp: '+gv('cv-e')+' | Formation: '+gv('cv-f')+' | Competences: '+gv('cv-c')+' | Langues: '+gv('cv-l')+'\nStructure: PROFIL / EXPERIENCES / FORMATION / COMPETENCES / LANGUES. Professionnel, adapte marche beninois.',
+    lettre:'Redige une '+gv('lt-y')+' formelle pour '+gv('lt-n')+', a '+gv('lt-d')+'. Contexte: '+gv('lt-c')+'. Formule appel, corps structure, politesse adaptee Benin.',
+    business:'Business plan: Nom: '+gv('bz-n')+' | Secteur: '+gv('bz-s')+' | Idee: '+gv('bz-d')+' | Budget: '+gv('bz-b')+'. Sections: RESUME EXECUTIF / DESCRIPTION / MARCHE BENINOIS / STRATEGIE / PLAN FINANCIER / CONCLUSION.',
+    traduction:'Traduis du francais vers '+gv('tr-l')+': "'+gv('tr-t')+'". Uniquement la traduction.',
+    sms:'Message parfait "'+gv('sm-t')+'" pour '+gv('sm-p')+'. Contexte: '+gv('sm-c')+'. Authentique et touchant. Commence directement par le message.',
+    calcul:'Analyse notes: "'+gv('ca-n')+'". Type: '+gv('ca-t')+'. Calcule moyenne ponderee, bilan, matieres fortes/faibles, conseils.',
+    maternelle:'Enseignant maternelle Benin. Fiche sur "'+gv('ma-t')+'" en '+gv('ma-s')+'. Simple, ludique, adapte 3-7 ans.',
+    primaire:'Professeur primaire Benin. Cours sur "'+gv('pr-s')+'" en '+gv('pr-m')+', niveau '+gv('pr-n')+'. Programme MEMP. Definitions, exemples, exercices corriges.',
+    college:'Professeur college Benin. Cours sur "'+gv('co-s')+'" en '+gv('co-m')+', niveau '+gv('co-n')+'. Programme officiel. Resume, formules, exemples, questions revision.',
+    lycee:'Professeur lycee Benin. Cours sur "'+gv('ly-t')+'" en '+gv('ly-m')+', serie '+gv('ly-s')+'. Programme BAC. Theoremes, formules, methodes, exercices types BAC.',
+    technique:'Expert enseignement technique Benin. Cours sur "'+gv('te-s')+'" filiere '+gv('te-f')+'. Theorie + pratique + outils illustres.',
+    superieur:'Enseignant universitaire Benin. Cours sur "'+gv('su-s')+'" en '+gv('su-m')+', faculte '+gv('su-f')+'. Resume academique, concepts cles, exemples.',
+    panegyrique:'Griot tradition beninoise. Panegirique (Yekeyeke Fon / Oriki Yoruba) pour famille '+gv('pa-n')+', groupe '+gv('pa-e')+', region '+gv('pa-r')+'.\n1. ORIGINE & HISTOIRE\n2. PANEGIRIQUE (langue locale + traduction)\n3. VALEURS & VERTUS\n4. FAITS MARQUANTS\n5. INVOCATION ANCESTRALE',
+    nomfamille:'Linguiste expert Benin. Analyse nom "'+gv('nf-f')+'" prenom "'+gv('nf-p')+'" origine '+gv('nf-o')+'.\n1. ETYMOLOGIE\n2. SIGNIFICATION PROFONDE\n3. HISTOIRE & FAMILLES CONNUES\n4. SYMBOLIQUE CULTURELLE\n5. VARIANTES',
+    proverbes:'Griot sagesse africaine. 5 proverbes sur "'+gv('pv-t')+'" en '+gv('pv-l')+'.\nPour chaque: Original + Traduction + Signification + Contexte culturel beninois.',
+    quiz:'Expert geographie Benin. Quiz "'+gv('qz-t')+'" pour '+gv('qz-p')+'.\n5 questions avec 4 choix A/B/C/D + bonne reponse + explication. Instructif et amusant!',
+    horoscope:'Astrologue bienveillant. Horoscope pour '+gv('ho-p')+' ('+gv('ho-s')+').\nAMOUR / TRAVAIL / ARGENT / CHANCE DU JOUR / SANTE / MESSAGE ANCESTRAL AFRICAIN / CONSEIL DU JOUR',
+    coach:'Coach vie jeunes africains. Domaine: "'+gv('coa-d')+'". Question: "'+gv('coa-q')+'".\nANALYSE / 3 CONSEILS CONCRETS / ACTION IMMEDIATE / ENCOURAGEMENT',
+    couture:'Expert couture africaine. Sujet: "'+gv('ct-s')+'". Question: "'+gv('ct-q')+'". Outils, techniques, conseils pratiques.',
+    maconnerie:'Expert maconnerie Benin. Sujet: "'+gv('mc-s')+'". Question: "'+gv('mc-q')+'". Outils, techniques, materiaux locaux.',
+    electricite:'Expert electricite. Domaine: "'+gv('el-s')+'". Probleme: "'+gv('el-q')+'". Outils, securite, etapes techniques.',
+    mecanique:'Expert mecanique. Type: "'+gv('me-s')+'". Vehicule: "'+gv('me-m')+'". Probleme: "'+gv('me-q')+'". Diagnostic et solution.',
+    agriculture:'Expert agronome Benin. Sujet: "'+gv('ag-s')+'". Question: "'+gv('ag-q')+'". Techniques climat beninois, conseils ecologiques.',
+    beaute:'Expert beaute africaine. Domaine: "'+gv('be-s')+'". Question: "'+gv('be-q')+'". Techniques, produits peaux africaines.',
+    menuiserie:'Expert menuiserie/soudure. Domaine: "'+gv('mn-s')+'". Projet: "'+gv('mn-q')+'". Outils, techniques, materiaux.',
+    plomberie:'Expert plomberie. Domaine: "'+gv('pl-s')+'". Probleme: "'+gv('pl-q')+'". Outils, procedures, conseils qualite.',
+    faune:'Zoologiste expert. Animal: "'+gv('fa-a')+'", region: '+gv('fa-p')+', info: '+gv('fa-s')+'. Description, habitat, conservation.',
+    aquatique:'Biologiste expert. Espece: "'+gv('aq-a')+'", milieu: '+gv('aq-p')+', info: '+gv('aq-s')+'. Description, importance economique, conservation.',
+    flore:'Botaniste expert. Plante: "'+gv('fl-n')+'", region: '+gv('fl-p')+', info: '+gv('fl-s')+'. Description, proprietes medicinales, usages.',
+    geographie:'Expert geographie Benin. Sujet: "'+gv('ge-s')+'". Question: "'+gv('ge-q')+'". Informations precises et detaillees.'
+  };
+  return P[id]||'Genere un contenu utile et structure en francais.';
+}
+
+// BUILD FIELD HTML
+function fHTML(f){
+  if(f.t==='s'){
+    var o=(f.op||[]).map(function(x){return'<option value="'+x+'">'+x+'</option>';}).join('');
+    return'<select id="'+f.id+'"><option value="">-- '+f.ph+' --</option>'+o+'</select>';
+  }
+  if(f.t==='ta')return'<textarea id="'+f.id+'" rows="3" placeholder="'+f.ph+'"></textarea>';
+  return'<input type="text" id="'+f.id+'" placeholder="'+f.ph+'">';
+}
+
+// BUILD PAYMENT FLOW
+function buildPF(id){
+  return'<div id="pfl-'+id+'" style="display:none">'+
+  '<div class="pay-steps">'+
+    '<div class="pst"><div class="psn act" id="sn1-'+id+'">1</div><span class="psl act">Reseau</span></div>'+
+    '<div class="psline"></div>'+
+    '<div class="pst"><div class="psn" id="sn2-'+id+'">2</div><span class="psl">Numero</span></div>'+
+    '<div class="psline"></div>'+
+    '<div class="pst"><div class="psn" id="sn3-'+id+'">3</div><span class="psl">Confirmation</span></div>'+
+  '</div>'+
+  '<div class="ps on" id="ps1-'+id+'">'+
+    '<div class="anon-box"><div class="anon-title">🛡️ Paiement anonyme — Zenith Nova Academy</div>'+
+    '<div class="anon-body">Tu entres <strong>ton propre numero</strong>. Tu recois une <strong>demande push</strong>. Tu confirmes avec ton <strong>PIN</strong>. <strong style="color:var(--green)">Aucun numero destinataire affiche.</strong></div></div>'+
+    '<p style="font-size:.76rem;color:var(--muted);margin-bottom:7px;font-weight:600">Choisis ton reseau :</p>'+
+    '<div class="op-grid">'+
+      '<div class="op-c" id="op-mtn-'+id+'" onclick="selOp(\''+id+'\',\'mtn\',this)"><div class="op-em">📱</div><div class="op-nm">MTN MoMo</div><div class="op-sb">Reseau MTN</div></div>'+
+      '<div class="op-c" id="op-moov-'+id+'" onclick="selOp(\''+id+'\',\'moov\',this)"><div class="op-em">📲</div><div class="op-nm">Moov Money</div><div class="op-sb">Reseau Moov</div></div>'+
+      '<div class="op-c" id="op-cel-'+id+'" onclick="selOp(\''+id+'\',\'celtiis\',this)"><div class="op-em">📡</div><div class="op-nm">Celtiis Money</div><div class="op-sb">Reseau Celtiis</div></div>'+
+      '<div class="op-c intl" id="op-card-'+id+'" onclick="selOp(\''+id+'\',\'card\',this)"><div class="op-em">💳</div><div class="op-nm">Carte Bancaire</div><div class="op-sb">Visa · Mastercard · Monde entier</div></div>'+
+    '</div>'+
+  '</div>'+
+  '<div class="ps" id="ps2-'+id+'">'+
+    '<div class="instr-box">'+
+      '<div class="instr-title" id="s2t-'+id+'">📱 Entre ton numero Mobile Money</div>'+
+      '<div class="instr-list">'+
+        '<div class="instr-it"><div class="instr-bub">1</div><div class="instr-tx">Entre <strong>ton numero</strong> ci-dessous</div></div>'+
+        '<div class="instr-it"><div class="instr-bub">2</div><div class="instr-tx">Appuie sur <strong>Payer maintenant</strong></div></div>'+
+        '<div class="instr-it"><div class="instr-bub">3</div><div class="instr-tx">Recois la <strong>notification push</strong></div></div>'+
+        '<div class="instr-it"><div class="instr-bub">4</div><div class="instr-tx">Confirme avec ton <strong>code PIN</strong></div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div id="mmf-'+id+'" class="tel-wrap">'+
+      '<div class="tel-row">'+
+        '<div class="tel-pre">+229</div>'+
+        '<input type="tel" id="tel-'+id+'" class="tel-in" placeholder="97 12 34 56" maxlength="10">'+
+      '</div>'+
+      '<div class="tel-hint">Ton numero <span id="oplbl-'+id+'" style="color:var(--blue);font-weight:600">Mobile Money</span> · Aucun numero destinataire affiche</div>'+
+    '</div>'+
+    '<div id="cdf-'+id+'" style="display:none">'+
+      '<div class="anon-box" style="border-color:rgba(245,158,11,.2)">'+
+        '<div class="anon-title" style="color:var(--gold)">💳 Paiement carte securise</div>'+
+        '<div class="anon-body">Lien <strong>FedaPay securise</strong>. Visa/Mastercard acceptee. <span style="color:var(--green)">Aucune donnee bancaire stockee.</span></div>'+
+      '</div>'+
+    '</div>'+
+    '<button class="pb prim" id="paybtn-'+id+'" onclick="initPay(\''+id+'\')">💸 Payer maintenant</button>'+
+    '<button class="pb ghost" onclick="setStep(\''+id+'\',1)">← Changer de reseau</button>'+
+  '</div>'+
+  '<div class="ps" id="ps3-'+id+'">'+
+    '<div class="push-box">'+
+      '<div class="push-ico" id="pi-'+id+'">📳</div>'+
+      '<div class="push-st" id="pst-'+id+'">Demande envoyee</div>'+
+      '<div class="push-sub">Entre ton PIN. Si fonds insuffisants, ton operateur tinformera.</div>'+
+    '</div>'+
+    '<button class="pb prim" onclick="confirmPay(\''+id+'\')">✅ Jai confirme le paiement</button>'+
+    '<div style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:7px">Pas recu ? <span style="color:var(--blue);cursor:pointer" onclick="setStep(\''+id+'\',2)">Reessayer →</span></div>'+
+    '<button class="pb ghost" onclick="setStep(\''+id+'\',2)">← Retour</button>'+
+  '</div>'+
+  '</div>';
+}
+
+// BUILD MODAL
+function buildModal(id){
+  if(id==='auth'){
+    return'<div class="mover" id="mo-auth">'+
+    '<div class="modal">'+
+      '<div class="m-hdl"></div>'+
+      '<button class="m-x" onclick="closeM(\'auth\')">✕</button>'+
+      '<div class="m-ico">🔐</div>'+
+      '<h2 id="authTitle">Creer mon compte Zenith Nova Academy</h2>'+
+      '<p class="m-desc">Cree ton compte et profite de <strong style="color:var(--blue)">48h d\'essai gratuit</strong>.</p>'+
+      '<input type="text" class="auth-in" id="a-u" placeholder="Nom d\'utilisateur (ex: kofi2025)">'+
+      '<input type="password" class="auth-in" id="a-p" placeholder="Mot de passe (min 6 caracteres)">'+
+      '<input type="password" class="auth-in" id="a-p2" placeholder="Confirme le mot de passe">'+
+      '<button class="auth-btn" onclick="doAuth()">🚀 Creer mon compte · Essai 48h gratuit</button>'+
+      '<div class="auth-sw">Deja un compte ? <span onclick="toggleAuth()">Se connecter →</span></div>'+
+      '<div style="background:rgba(16,185,129,.07);border:1.5px solid rgba(16,185,129,.18);border-radius:10px;padding:11px;margin-top:11px;font-size:.74rem;color:var(--muted);line-height:1.7">'+
+        '✅ <strong style="color:var(--green)">48h gratuites</strong> activees des creation · 🔐 Anonyme · 🌍 Mondial'+
+      '</div>'+
+    '</div></div>';
+  }
+  if(id==='subscribe'){
+    return'<div class="mover" id="mo-subscribe">'+
+    '<div class="modal">'+
+      '<div class="m-hdl"></div>'+
+      '<button class="m-x" onclick="closeM(\'subscribe\')">✕</button>'+
+      '<div class="m-ico">🏆</div>'+
+      '<h2>Abonnement 30 jours</h2>'+
+      '<p class="m-desc">Acces illimite a tous les services. Se coupe automatiquement.</p>'+
+      '<div class="amt-box">'+
+        '<div class="amt-n" id="subAmt">500 FCFA</div>'+
+        '<div class="amt-conv" id="subConv">≈ 0.76 EUR · 0.83 USD · 0.65 GBP</div>'+
+        '<div class="amt-anon">🔐 Paiement anonyme · Retrait via MTN / Moov / Celtiis</div>'+
+      '</div>'+
+      '<p style="font-size:.76rem;color:var(--muted);margin-bottom:7px;font-weight:600">Choisis ta devise :</p>'+
+      '<div class="curr-grid">'+
+        '<div class="curr-opt sel" onclick="setCurr(this,\'500 FCFA\',\'≈ 0.76€ · 0.83$\')"><span class="curr-flag">🇧🇯</span>FCFA<span class="curr-sub">500 F</span></div>'+
+        '<div class="curr-opt" onclick="setCurr(this,\'0.76 EUR\',\'≈ 500 FCFA\')"><span class="curr-flag">🇪🇺</span>EUR<span class="curr-sub">0.76€</span></div>'+
+        '<div class="curr-opt" onclick="setCurr(this,\'$0.83 USD\',\'≈ 500 FCFA\')"><span class="curr-flag">🇺🇸</span>USD<span class="curr-sub">$0.83</span></div>'+
+        '<div class="curr-opt" onclick="setCurr(this,\'£0.65 GBP\',\'≈ 500 FCFA\')"><span class="curr-flag">🇬🇧</span>GBP<span class="curr-sub">£0.65</span></div>'+
+        '<div class="curr-opt" onclick="setCurr(this,\'$1.13 CAD\',\'≈ 500 FCFA\')"><span class="curr-flag">🇨🇦</span>CAD<span class="curr-sub">$1.13</span></div>'+
+        '<div class="curr-opt" onclick="setCurr(this,\'0.73 CHF\',\'≈ 500 FCFA\')"><span class="curr-flag">🇨🇭</span>CHF<span class="curr-sub">0.73Fr</span></div>'+
+      '</div>'+
+      buildPF('subscribe')+
+      '<div class="succ" id="ok-subscribe"><div class="s-circ">🏆</div><h3>Abonnement active !</h3><p>30 jours acces illimite. Rappel 72h avant expiration.</p>'+
+      '<button class="act-btn" onclick="closeM(\'subscribe\');goSec(\'services\')">🚀 Explorer</button></div>'+
+    '</div></div>';
+  }
+  var s=SVCS[id];
+  if(!s)return'';
+  var fields=s.fl.map(fHTML).join('');
+  return'<div class="mover" id="mo-'+id+'">'+
+  '<div class="modal">'+
+    '<div class="m-hdl"></div>'+
+    '<button class="m-x" onclick="closeM(\''+id+'\')">✕</button>'+
+    '<div class="m-ico" style="background:'+s.cl+'">'+s.ic+'</div>'+
+    '<h2>'+s.lb+'</h2>'+
+    '<p class="m-desc">'+(s.ds||'Remplis les champs puis appuie sur Generer.')+'</p>'+
+    '<div class="fg">'+fields+'</div>'+
+    '<button class="gen-btn" id="gb-'+id+'" onclick="handleGen(\''+id+'\')">⚡ Generer mon resultat</button>'+
+    '<div class="f-ld" id="ld-'+id+'"><div class="spin"></div><span>Intelligence artificielle en action...</span></div>'+
+    '<div class="f-out" id="ou-'+id+'"></div>'+
+    buildPF(id)+
+    '<div class="succ" id="ok-'+id+'">'+
+      '<div class="s-circ">✓</div><h3>Resultat pret !</h3><p>Genere avec succes.</p>'+
+      '<button class="act-btn" onclick="cpOut(\''+id+'\')">📋 Copier</button>'+
+      '<button class="act-btn" onclick="resetM(\''+id+'\')">🔄 Nouveau</button>'+
+    '</div>'+
+  '</div></div>';
+}
+
+// RENDER MODALS
+var allIds=['cv','lettre','business','traduction','sms','calcul',
+  'maternelle','primaire','college','lycee','technique','superieur',
+  'panegyrique','nomfamille','proverbes','quiz','horoscope','coach',
+  'couture','maconnerie','electricite','mecanique','agriculture','beaute','menuiserie','plomberie',
+  'faune','aquatique','flore','geographie','auth','subscribe'];
+
+var modRoot=document.getElementById('modRoot');
+if(modRoot){
+  modRoot.innerHTML=allIds.map(buildModal).join('');
+  document.querySelectorAll('.mover').forEach(function(o){
+    o.addEventListener('click',function(e){if(e.target===this)closeM(this.id.slice(3));});
+  });
+}
+
+// MODAL OPEN/CLOSE
+function openM(id){
+  if(['auth','subscribe'].indexOf(id)<0&&!canAccess()){
+    openM('auth');showToast('👋 Cree ton compte pour acceder !');return;
+  }
+  var el=document.getElementById('mo-'+id);
+  if(el){el.classList.add('on');document.body.style.overflow='hidden';}
+  updateUI();
+}
+function closeM(id){
+  var el=document.getElementById('mo-'+id);
+  if(el){el.classList.remove('on');document.body.style.overflow='';}
+}
+
+// ══════════════════════════════════════
+// BASE DE DONNÉES ÉTABLISSEMENTS BÉNIN
+// ══════════════════════════════════════
+var ETABS = [
+  // UNIVERSITÉS PUBLIQUES
+  {nom:"Université d'Abomey-Calavi (UAC)",ville:"Abomey-Calavi",dept:"Atlantique",type:"Université Publique"},
+  {nom:"Université de Parakou (UP)",ville:"Parakou",dept:"Borgou",type:"Université Publique"},
+  {nom:"Université d'Agriculture de Kétou (UAK)",ville:"Kétou",dept:"Plateau",type:"Université Publique"},
+  {nom:"Université de Porto-Novo (UPN)",ville:"Porto-Novo",dept:"Ouémé",type:"Université Publique"},
+  {nom:"Université Nationale d'Agriculture (UNA)",ville:"Porto-Novo",dept:"Ouémé",type:"Université Publique"},
+  {nom:"UNSTIM",ville:"Abomey",dept:"Zou",type:"Université Publique"},
+  {nom:"Université de Lokossa",ville:"Lokossa",dept:"Mono",type:"Université Publique"},
+  {nom:"Université de Natitingou",ville:"Natitingou",dept:"Atacora",type:"Université Publique"},
+  // UNIVERSITÉS PRIVÉES
+  {nom:"ESCAE Bénin",ville:"Cotonou",dept:"Littoral",type:"Université Privée"},
+  {nom:"USTB",ville:"Cotonou",dept:"Littoral",type:"Université Privée"},
+  {nom:"ISFOP",ville:"Cotonou",dept:"Littoral",type:"Université Privée"},
+  {nom:"Lakeside University College (LUC)",ville:"Cotonou",dept:"Littoral",type:"Université Privée"},
+  {nom:"UPAO",ville:"Porto-Novo",dept:"Ouémé",type:"Université Privée"},
+  {nom:"Institut Universitaire du Bénin",ville:"Cotonou",dept:"Littoral",type:"Université Privée"},
+  // LYCÉES & COLLÈGES PUBLICS
+  {nom:"Lycée Béhanzin",ville:"Cotonou",dept:"Littoral",type:"Lycée Public"},
+  {nom:"CEG Akpakpa",ville:"Cotonou",dept:"Littoral",type:"Collège Public"},
+  {nom:"CEG Cadjehoun",ville:"Cotonou",dept:"Littoral",type:"Collège Public"},
+  {nom:"CEG Godomey",ville:"Godomey",dept:"Atlantique",type:"Collège Public"},
+  {nom:"CEG Abomey-Calavi",ville:"Abomey-Calavi",dept:"Atlantique",type:"Collège Public"},
+  {nom:"CEG Application de Porto-Novo",ville:"Porto-Novo",dept:"Ouémé",type:"Collège Public"},
+  {nom:"Lycée Toffa 1er",ville:"Porto-Novo",dept:"Ouémé",type:"Lycée Public"},
+  {nom:"CEG Porto-Novo 1",ville:"Porto-Novo",dept:"Ouémé",type:"Collège Public"},
+  {nom:"CEG Porto-Novo 2",ville:"Porto-Novo",dept:"Ouémé",type:"Collège Public"},
+  {nom:"Lycée Mathieu Bouéké",ville:"Parakou",dept:"Borgou",type:"Lycée Public"},
+  {nom:"CEG Parakou 1",ville:"Parakou",dept:"Borgou",type:"Collège Public"},
+  {nom:"CEG Parakou 2",ville:"Parakou",dept:"Borgou",type:"Collège Public"},
+  {nom:"Lycée Eugène Jamot",ville:"Abomey",dept:"Zou",type:"Lycée Public"},
+  {nom:"CEG Abomey 1",ville:"Abomey",dept:"Zou",type:"Collège Public"},
+  {nom:"CEG Natitingou",ville:"Natitingou",dept:"Atacora",type:"Collège Public"},
+  {nom:"CEG Lokossa",ville:"Lokossa",dept:"Mono",type:"Collège Public"},
+  {nom:"CEG Bohicon 1",ville:"Bohicon",dept:"Zou",type:"Collège Public"},
+  {nom:"CEG Ouidah",ville:"Ouidah",dept:"Atlantique",type:"Collège Public"},
+  {nom:"CEG Kandi",ville:"Kandi",dept:"Alibori",type:"Collège Public"},
+  {nom:"CEG Djougou",ville:"Djougou",dept:"Donga",type:"Collège Public"},
+  {nom:"CEG Savalou",ville:"Savalou",dept:"Collines",type:"Collège Public"},
+  {nom:"CEG Aplahoué",ville:"Aplahoué",dept:"Couffo",type:"Collège Public"},
+  // LYCÉES & COLLÈGES PRIVÉS
+  {nom:"Collège Notre Dame des Apôtres",ville:"Cotonou",dept:"Littoral",type:"Collège Privé"},
+  {nom:"Collège Père Aupiais",ville:"Cotonou",dept:"Littoral",type:"Collège Privé"},
+  {nom:"EPS Saint Jean Bosco",ville:"Cotonou",dept:"Littoral",type:"Lycée Privé"},
+  {nom:"Collège Notre Dame de Lourdes",ville:"Porto-Novo",dept:"Ouémé",type:"Collège Privé"},
+  {nom:"Collège Catholique Hibiscus",ville:"Parakou",dept:"Borgou",type:"Collège Privé"},
+  {nom:"Séminaire Fatima",ville:"Parakou",dept:"Borgou",type:"Lycée Privé"},
+  {nom:"PRYTA MIL",ville:"Bembèrèkè",dept:"Borgou",type:"Lycée Privé"},
+  {nom:"Collège Saint Joseph",ville:"Cotonou",dept:"Littoral",type:"Collège Privé"},
+  {nom:"Collège Sainte Rita",ville:"Cotonou",dept:"Littoral",type:"Collège Privé"},
+  {nom:"Collège Sainte Thérèse",ville:"Parakou",dept:"Borgou",type:"Collège Privé"},
+  // PRIMAIRES
+  {nom:"École Primaire Publique Cotonou Centre",ville:"Cotonou",dept:"Littoral",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Akpakpa",ville:"Cotonou",dept:"Littoral",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Porto-Novo Centre",ville:"Porto-Novo",dept:"Ouémé",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Parakou Centre",ville:"Parakou",dept:"Borgou",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Abomey Centre",ville:"Abomey",dept:"Zou",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Ouidah",ville:"Ouidah",dept:"Atlantique",type:"École Primaire Publique"},
+  {nom:"École Primaire Publique Bohicon",ville:"Bohicon",dept:"Zou",type:"École Primaire Publique"},
+  // MATERNELLES
+  {nom:"École Maternelle Publique Cotonou",ville:"Cotonou",dept:"Littoral",type:"Maternelle Publique"},
+  {nom:"École Maternelle Publique Porto-Novo",ville:"Porto-Novo",dept:"Ouémé",type:"Maternelle Publique"},
+  {nom:"École Maternelle Publique Parakou",ville:"Parakou",dept:"Borgou",type:"Maternelle Publique"},
+];
+
+// Load user-added establishments from localStorage
+function loadUserEtabs(){
+  try{var u=JSON.parse(localStorage.getItem('zna_etabs')||'[]');return u;}catch(e){return[];}
+}
+function saveUserEtab(nom,ville,dept){
+  var list=loadUserEtabs();
+  list.push({nom:nom,ville:ville,dept:dept||'',type:'Établissement signalé',userAdded:true});
+  localStorage.setItem('zna_etabs',JSON.stringify(list));
+  // Also add to ETABS for this session
+  ETABS.push({nom:nom,ville:ville,dept:dept||'',type:'Établissement signalé'});
+}
+
+function getEtabOptions(){
+  var all=ETABS.concat(loadUserEtabs());
+  return all.map(function(e){
+    return'<option value="'+e.nom+'">'+e.nom+' ('+e.type+' · '+e.ville+')</option>';
+  }).join('');
+}
+
+function checkOtherEtab(){
+  var sel=document.getElementById('a-etab');
+  var div=document.getElementById('autreEtabDiv');
+  if(sel&&div)div.style.display=sel.value==='autre'?'block':'none';
+}
+
+function updateCommunes(){}
+
+// AUTH
+var authMode='reg';
+function toggleAuth(){
+  authMode=authMode==='reg'?'log':'reg';
+  var r=authMode==='reg';
+  document.getElementById('authTitle').textContent=r?'Creer mon compte Zenith Nova Academy':'Se connecter';
+  var p2=document.getElementById('a-p2');if(p2)p2.style.display=r?'block':'none';
+  var rf=document.getElementById('regFields');if(rf)rf.style.display=r?'block':'none';
+  document.querySelector('.auth-sw').innerHTML=r?'Deja un compte ? <span onclick="toggleAuth()">Se connecter →</span>':"Pas de compte ? <span onclick=\"toggleAuth()\">S'inscrire →</span>";
+}
+function doAuth(){
+  var u=(document.getElementById('a-u').value||'').trim();
+  var p=document.getElementById('a-p').value||'';
+  if(!u||u.length<3){showToast('⚠️ Nom trop court (min 3)');return;}
+  if(!p||p.length<6){showToast('⚠️ Mot de passe trop court (min 6)');return;}
+  if(authMode==='reg'){
+    var p2=document.getElementById('a-p2').value||'';
+    if(p!==p2){showToast('⚠️ Mots de passe differents');return;}
+    var ref=new URLSearchParams(location.search).get('ref');
+    if(ref){localStorage.setItem('zna_refby',ref);showToast('🎁 Code parrain applique !');}
+  } else {
+    var stored=null;
+    try{stored=JSON.parse(localStorage.getItem('zna_user'));}catch(e){}
+    if(!stored||stored.u!==u||stored.p!==btoa(p)){showToast('⚠️ Identifiants incorrects');return;}
+  }
+  // Save establishment if user added a new one
+  if(authMode==='reg'){
+    var etabSel=document.getElementById('a-etab');
+    var etabVal=etabSel?etabSel.value:'';
+    if(etabVal==='autre'){
+      var autreNom=(document.getElementById('a-etab-autre')||{}).value||'';
+      var autreVille=(document.getElementById('a-etab-ville')||{}).value||'';
+      if(autreNom)saveUserEtab(autreNom,autreVille,'');
+      etabVal=autreNom;
+    }
+    var lvl=(document.getElementById('a-lvl')||{}).value||'';
+    var dept=(document.getElementById('a-dept')||{}).value||'';
+    var commune=(document.getElementById('a-commune')||{}).value||'';
+    USER={u:u,p:btoa(p),created:Date.now(),etab:etabVal,lvl:lvl,dept:dept,commune:commune};
+  } else {
+    USER={u:u,p:btoa(p),created:Date.now()};
+  }
+  localStorage.setItem('zna_user',JSON.stringify(USER));
+  if(authMode==='reg'){TRIAL=Date.now();localStorage.setItem('zna_trial',TRIAL);}
+  closeM('auth');
+  showToast(authMode==='reg'?'🎉 Bienvenue '+u+' ! 48h gratuites !':'👋 Bon retour '+u+' !');
+  updateUI();
+}
+
+// PAYMENT
+var opMap={};
+function setStep(id,n){
+  for(var i=1;i<=3;i++){
+    var s=document.getElementById('ps'+i+'-'+id);if(s)s.className='ps'+(i===n?' on':'');
+    var sn=document.getElementById('sn'+i+'-'+id);
+    if(sn)sn.className='psn'+(i<n?' done':i===n?' act':'');
+    var sl=sn?sn.nextElementSibling:null;
+    if(sl)sl.className='psl'+(i===n?' act':'');
+  }
+}
+function selOp(id,op,el){
+  var grid=el.closest('.op-grid');
+  if(grid)grid.querySelectorAll('.op-c').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');
+  opMap[id]=op;
+  var names={mtn:'MTN MoMo',moov:'Moov Money',celtiis:'Celtiis Money',card:'Carte Bancaire'};
+  var lbl=document.getElementById('oplbl-'+id);if(lbl)lbl.textContent=names[op]||'Mobile Money';
+  var mmf=document.getElementById('mmf-'+id),cdf=document.getElementById('cdf-'+id);
+  var t=document.getElementById('s2t-'+id);
+  if(op==='card'){if(mmf)mmf.style.display='none';if(cdf)cdf.style.display='block';if(t)t.textContent='💳 Paiement carte securise';}
+  else{if(mmf)mmf.style.display='block';if(cdf)cdf.style.display='none';if(t)t.textContent='📱 Entre ton numero '+names[op];}
+  setTimeout(function(){setStep(id,2);},260);
+}
+function setCurr(el,amt,conv){
+  el.closest('.curr-grid').querySelectorAll('.curr-opt').forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel');
+  var a=document.getElementById('subAmt'),c=document.getElementById('subConv');
+  if(a)a.textContent=amt;if(c)c.textContent=conv;
+}
+function initPay(id){
+  var op=opMap[id]||'mtn';
+  if(op==='card'){
+    setStep(id,3);
+    var pst=document.getElementById('pst-'+id),pi=document.getElementById('pi-'+id);
+    if(pst)pst.textContent='Lien FedaPay en cours...';if(pi)pi.textContent='💳';return;
+  }
+  var tel=(document.getElementById('tel-'+id)||{}).value||'';
+  if(!tel||tel.replace(/\D/g,'').length<8){
+    var inp=document.getElementById('tel-'+id);
+    if(inp){inp.style.borderColor='var(--red)';inp.style.animation='shake .3s ease';
+      setTimeout(function(){inp.style.animation='';inp.style.borderColor='var(--border)';},600);}
+    showToast('⚠️ Entre un numero valide (8 chiffres min)');return;
+  }
+  var btn=document.getElementById('paybtn-'+id);
+  if(btn){btn.disabled=true;btn.textContent='📡 Envoi...';}
+  setTimeout(function(){
+    if(btn){btn.disabled=false;btn.textContent='💸 Payer maintenant';}
+    setStep(id,3);
+    var pi=document.getElementById('pi-'+id),pst=document.getElementById('pst-'+id);
+    if(pi&&pst){
+      var i=0,fr=['📳','🔔','📱','🔔'];
+      var iv=setInterval(function(){pi.textContent=fr[i++%fr.length];if(i>12)clearInterval(iv);},380);
+      pst.innerHTML='Demande envoyee au <b style="color:var(--blue)">+229 '+tel+'</b>';
+    }
+  },1000);
+}
+function confirmPay(id){
+  var pi=document.getElementById('pi-'+id),pst=document.getElementById('pst-'+id);
+  if(pi)pi.textContent='✅';if(pst){pst.textContent='Paiement confirme !';pst.style.color='var(--green)';}
+  SUBEXP=Date.now()+2592000000;
+  localStorage.setItem('zna_sub',SUBEXP.toString());
+  localStorage.removeItem('zna_warned');
+  setTimeout(function(){
+    if(id==='subscribe'){
+      var ok=document.getElementById('ok-subscribe');if(ok)ok.classList.add('on');
+      var pfl=document.getElementById('pfl-subscribe');if(pfl)pfl.style.display='none';
+    } else {genAI(id);}
+  },600);
+}
+
+// GENERATE
+function handleGen(id){
+  if(!canAccess()){openM('auth');showToast('👋 Cree ton compte pour acceder !');return;}
+  var s=SVCS[id];
+  var ok=false;
+  if(s&&s.fl){
+    for(var i=0;i<s.fl.length;i++){
+      var el=document.getElementById(s.fl[i].id);
+      if(el&&(el.value||'').trim()){ok=true;break;}
+    }
+  }
+  if(!ok){showToast('⚠️ Remplis au moins un champ !');return;}
+  var btn=document.getElementById('gb-'+id);
+  if(btn){btn.disabled=true;btn.textContent='⏳ Generation en cours...';}
+  genAI(id).then(function(){
+    if(btn){btn.disabled=false;btn.textContent='⚡ Generer mon resultat';}
+  }).catch(function(){
+    if(btn){btn.disabled=false;btn.textContent='⚡ Generer mon resultat';}
+  });
+}
+
+async function genAI(id){
+  var ld=document.getElementById('ld-'+id);
+  var ou=document.getElementById('ou-'+id);
+  var ok=document.getElementById('ok-'+id);
+  var pfl=document.getElementById('pfl-'+id);
+  if(pfl)pfl.style.display='none';
+  if(ld)ld.classList.add('on');
+  if(ou)ou.classList.remove('on');
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:buildPrompt(id)}]
+      })
+    });
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var j=await r.json();
+    var t=j.content?j.content.map(function(c){return c.text||'';}).join(''):'';
+    if(!t)throw new Error('Vide');
+    if(ld)ld.classList.remove('on');
+    if(ou){ou.textContent=t;ou.classList.add('on');}
+    if(ok)ok.classList.add('on');
+    if(ou)ou.scrollIntoView({behavior:'smooth',block:'nearest'});
+    addPoints(10,'✅ Service utilise !');
+  }catch(err){
+    if(ld)ld.classList.remove('on');
+    if(ou){ou.textContent='⚠️ Erreur de connexion.\n\nPour que la generation IA fonctionne, une cle API Anthropic est necessaire.\nContacte l\'administrateur ou reessaie plus tard.';ou.classList.add('on');}
+  }
+}
+
+function resetM(id){
+  var ids=['ou-','ok-','ld-'];
+  for(var i=0;i<ids.length;i++){
+    var el=document.getElementById(ids[i]+id);
+    if(el){el.classList.remove('on');if(ids[i]==='ou-')el.textContent='';}
+  }
+  var pfl=document.getElementById('pfl-'+id);if(pfl)pfl.style.display='none';
+  var btn=document.getElementById('gb-'+id);
+  if(btn){btn.disabled=false;btn.textContent='⚡ Generer mon resultat';}
+  setStep(id,1);
+}
+function cpOut(id){
+  var t=(document.getElementById('ou-'+id)||{}).textContent||'';
+  if(navigator.clipboard)navigator.clipboard.writeText(t).catch(function(){});
+  showToast('✓ Resultat copie !');
+}
+
+// DAILY QUIZ
+var qQuestions=[],qCurrent=0,qScore=0,qTimer=null,qTimeLeft=60;
+// BANQUE DE QUESTIONS PAR NIVEAU ET MATIERE
+var QUESTION_BANK = {
+
+  // ══════════════════════════════════════
+  // 4EME — HISTOIRE
+  // ══════════════════════════════════════
+  '4eme_histoire': [
+    {q:"Qu'est-ce que la traite transatlantique ?",opts:["Commerce de produits tropicaux","Déportation massive d'Africains vers l'Amérique comme esclaves","Echange commercial entre l'Europe et l'Asie","Migration volontaire d'Africains"],answer:1,exp:"La traite transatlantique ou traite des Noirs est la déportation massive des africains noirs vers le continent américain où ils ont été utilisés comme esclaves."},
+    {q:"Qui a découvert l'Amérique et en quelle année ?",opts:["Vasco de Gama en 1498","Christophe Colomb en 1492","Magellan en 1519","Bartolomeu Dias en 1488"],answer:1,exp:"Le 12 octobre 1492, Christophe Colomb a découvert l'Amérique en croyant avoir atteint les Indes."},
+    {q:"Combien de continents le commerce triangulaire impliquait-il ?",opts:["2","4","3","5"],answer:2,exp:"Le commerce triangulaire impliquait 3 continents : l'Europe, l'Afrique et l'Amérique."},
+    {q:"Quel roi du Danxomè a érigé la traite en monopole royal ?",opts:["Agadja","Ghezo","Kpingla","Glèlè"],answer:2,exp:"Le roi Kpingla (1774-1789) a érigé la traite négrière en monopole royal à Ouidah."},
+    {q:"Quel est le nom du lieu d'embarquement des esclaves à Ouidah ?",opts:["La porte du retour","La porte du non-retour","La place CHACHA","L'arbre de l'oubli"],answer:1,exp:"La porte du non-retour était la plage d'embarquement finale des esclaves à Ouidah avant leur déportation vers l'Amérique."},
+    {q:"En quelle année la France a-t-elle définitivement aboli l'esclavage ?",opts:["1794","1833","1848","1865"],answer:2,exp:"Le 27 avril 1848, Victor Schœlcher obtint la signature du décret d'abolition de l'esclavage dans les colonies françaises."},
+    {q:"Qu'était la CHACHA à Ouidah ?",opts:["Un chef religieux","Une place où les esclaves étaient vendus","Un roi local","Un bateau négrier"],answer:1,exp:"La place CHACHA à Ouidah était le lieu où les esclaves étaient rassemblés et vendus lors des échanges de la traite."},
+    {q:"Quel est le terme désignant les esclaves dans le royaume de Danxomè ?",opts:["AXOVI","ANATO","KANNOUMON","AHOVI"],answer:2,exp:"Dans le royaume de Danxomè, les esclaves étaient appelés KANNOUMON et se trouvaient à la base de la hiérarchie sociale."},
+    {q:"Quel était le rôle de Francisco Félix de Souza à Agoué ?",opts:["Gouverneur colonial","Créateur d'une captiverie d'esclaves","Chef du royaume d'Allada","Commandant d'un navire négrier"],answer:1,exp:"Francisco Félix de Souza avait créé une captiverie d'esclaves à Agoué, petite localité à 18 km de Grand Popo."},
+    {q:"Quels étaient les 3 types d'Africains vendus comme esclaves avant l'arrivée des Européens ?",opts:["Nobles, commerçants, artisans","Prisonniers de guerre, criminels, débiteurs insolvables","Enfants, femmes, vieillards","Agriculteurs, pêcheurs, chasseurs"],answer:1,exp:"Avant l'arrivée des Européens, les esclaves en Afrique étaient surtout des prisonniers de guerre, des criminels de tout genre et des débiteurs insolvables."},
+    {q:"En quelle année Kutonu est-il devenu le second port négrier du royaume de Danxomè ?",opts:["1820","1830","1840","1833"],answer:1,exp:"En 1830, sous le roi Ghézo, Kutonu est devenu le second port du royaume de Danxomè, pour échapper à la surveillance anglaise à Ouidah."},
+    {q:"Qu'est-ce que le ZOMAI à Ouidah ?",opts:["Un bateau négrier","Un lieu où les esclaves étaient entreposés avant l'embarquement","La maison du chef CHACHA","Un fort européen"],answer:1,exp:"Le ZOMAI était le lieu où les esclaves étaient entreposés après avoir parcouru le chemin depuis la place CHACHA jusqu'à la plage."},
+  ],
+
+  // ══════════════════════════════════════
+  // 4EME — GEOGRAPHIE
+  // ══════════════════════════════════════
+  '4eme_geo': [
+    {q:"Combien de milieux naturels principaux le Bénin possède-t-il selon le programme ?",opts:["2","3","4","5"],answer:2,exp:"Le Bénin possède principalement 4 milieux naturels : le milieu béninien (côtier), le milieu sud soudanien, le milieu nord soudanien et le milieu atacorien."},
+    {q:"Quelle était la population du Bénin en 2013 selon le recensement ?",opts:["6 969 914","9 983 884","3 300 000","12 000 000"],answer:1,exp:"Selon le recensement de 2013, la population du Bénin était de 9 983 884 habitants."},
+    {q:"Qu'est-ce que la démographie ?",opts:["L'étude des ressources naturelles","L'étude de la population et des données statistiques humaines","L'étude du climat","L'étude des migrations"],answer:1,exp:"La démographie est l'étude de la population, des données statistiques humaines d'une région ou d'un pays."},
+    {q:"Quel pourcentage de la population béninoise avait moins de 15 ans selon les données du programme ?",opts:["17%","4%","47%","30%"],answer:2,exp:"Selon les indices démographiques du programme, 47% de la population béninoise avait moins de 15 ans, montrant l'extrême jeunesse de la population."},
+    {q:"Quelle est la projection de la population béninoise pour 2050 selon le programme ?",opts:["15 millions","18 millions","22,1 millions","30 millions"],answer:2,exp:"Selon les projections du programme, la population du Bénin risque d'atteindre 22 100 000 habitants en 2050."},
+    {q:"Quel est le principal problème des milieux ruraux lié à la croissance démographique ?",opts:["La pollution industrielle","Le départ des jeunes capables de travailler la terre","L'excès de main d'oeuvre","Le manque d'eau"],answer:1,exp:"Dans les milieux ruraux, le départ des jeunes capables de travailler la terre est un problème majeur lié à l'évolution démographique."},
+    {q:"Quelle est la définition d'un milieu urbain selon le programme ?",opts:["Un village de pêcheurs","Un milieu géographique composé d'agglomérations où les hommes travaillent dans les administrations","Une zone agricole","Un espace forestier"],answer:1,exp:"Le milieu urbain est un milieu géographique composé d'agglomérations. Les habitants y travaillent dans les administrations, les services et autres."},
+    {q:"Quelle était la population du Bénin en 1979 ?",opts:["3,3 millions","5 millions","6,9 millions","2 millions"],answer:0,exp:"En 1979, la population du Bénin était de 3,3 millions d'habitants, avant de croître rapidement pour atteindre près de 10 millions en 2013."},
+  ],
+
+  // ══════════════════════════════════════
+  // 4EME — DROITS DE L'HOMME
+  // ══════════════════════════════════════
+  '4eme_droits': [
+    {q:"Quel événement du XXe siècle est considéré comme un génocide en Afrique ?",opts:["La guerre du Congo","Le génocide des Tutsi rwandais","La guerre d'Algérie","La guerre du Biafra"],answer:1,exp:"Le génocide des Tutsi rwandais est l'un des cas de génocide en Afrique étudié en classe de 4e au Bénin."},
+    {q:"Quel nom donne-t-on au génocide des Juifs pendant la Seconde Guerre mondiale ?",opts:["L'Holocauste","La Shoah","Le Grand Remplacement","La Solution finale"],answer:1,exp:"La Shoah désigne le génocide des Juifs perpétré par les nazis pendant la Seconde Guerre mondiale, étudié en classe de 4e."},
+    {q:"Que garantissent les droits de l'Homme selon le programme de 4e ?",opts:["La richesse économique","La culture de la paix","La puissance militaire","Le développement industriel"],answer:1,exp:"Selon le programme de 4e, les droits de l'Homme peuvent garantir la culture de la paix entre les peuples et les nations."},
+  ],
+
+  // ══════════════════════════════════════
+  // 6EME — ANGLAIS (Programme officiel INIFRCF 2020)
+  // ══════════════════════════════════════
+  '6eme_anglais': [
+    // LEARNING SITUATION 1 — AT SCHOOL
+    // Greetings and Introductions
+    {q:"How do you greet someone in the morning in English?",opts:["Good evening","Good morning","Good night","Goodbye"],answer:1,exp:"'Good morning' is used to greet someone in the morning. 'Good evening' is for the evening, 'Good night' is for bedtime."},
+    {q:"What do you say when you meet someone for the first time?",opts:["See you later","Nice to meet you","Goodbye","Good night"],answer:1,exp:"'Nice to meet you' is the correct expression when meeting someone for the first time in English."},
+    {q:"What is the correct question to ask someone's name?",opts:["What is your age?","Where are you from?","What is your name?","How are you?"],answer:2,exp:"'What is your name?' is the correct question to ask someone's name in English."},
+    {q:"How do you say 'Je m'appelle Kossi' in English?",opts:["I am called Kossi","My name is Kossi","I name Kossi","Call me is Kossi"],answer:1,exp:"'My name is Kossi' is the correct translation of 'Je m'appelle Kossi' in English."},
+    // Numbers
+    {q:"What comes after 'nineteen' in English?",opts:["Ninety","Eleven","Twenty","Twelve"],answer:2,exp:"After 'nineteen' (19) comes 'twenty' (20) in English numbers."},
+    {q:"How do you write the number 15 in English?",opts:["Fifty","Fifteenth","Fifteen","Fifth"],answer:2,exp:"The number 15 is written 'fifteen' in English."},
+    {q:"What is the ordinal number for '1' in English?",opts:["One","Oneth","Firstly","First"],answer:3,exp:"The ordinal number for 1 is 'first' (1st) in English. Ordinal numbers indicate position or order."},
+    {q:"How do you say '3rd' in English?",opts:["Threeth","Three","Third","Thirdly"],answer:2,exp:"3rd is said 'third' in English. Ordinal numbers ending in 3 (except 13) take '-rd'."},
+    // Days and time
+    {q:"What day comes after Monday?",opts:["Sunday","Wednesday","Saturday","Tuesday"],answer:3,exp:"Tuesday comes after Monday. The days of the week are: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday."},
+    {q:"What is the correct way to say the time '3:00' in English?",opts:["It is three hours","It is three o'clock","Three is the time","At three"],answer:1,exp:"'It is three o'clock' or simply 'It's three o'clock' is the correct way to say 3:00 in English."},
+    // Classroom furniture
+    {q:"What do you call the furniture where a teacher writes in class?",opts:["Chair","Desk","Blackboard","Bench"],answer:2,exp:"The 'blackboard' (or 'board') is what the teacher writes on during class. 'Desk' is where you sit and work."},
+    {q:"What is a 'ruler' used for in class?",opts:["Writing letters","Drawing straight lines and measuring","Erasing mistakes","Sharpening pencils"],answer:1,exp:"A 'ruler' is a school supply used for drawing straight lines and measuring distances."},
+    // Demonstratives
+    {q:"Which sentence uses 'this' correctly?",opts:["This are my books","This is my pen","This am a chair","This were students"],answer:1,exp:"'This is my pen' is correct. 'This' is used for singular objects that are near to you."},
+    {q:"When do you use 'these' in English?",opts:["For one object far away","For one object near you","For many objects near you","For many objects far away"],answer:2,exp:"'These' is used for multiple (plural) objects that are near to you. Example: 'These are my books.'"},
+    // Prepositions
+    {q:"The book is _____ the table. (on top of it)",opts:["under","behind","on","in"],answer:2,exp:"'On' indicates that something is on top of a surface. Example: 'The book is on the table.'"},
+    {q:"The pen is _____ the pencil case. (inside it)",opts:["on","in","behind","next to"],answer:1,exp:"'In' indicates that something is inside something else. Example: 'The pen is in the pencil case.'"},
+    // LEARNING SITUATION 2 — FAMILY LIFE
+    {q:"What do you call your father's mother in English?",opts:["Aunt","Mother","Grandmother","Sister"],answer:2,exp:"Your father's mother (or mother's mother) is called 'grandmother' in English. Informally, she is called 'grandma' or 'granny'."},
+    {q:"Which word means 'frère' in English?",opts:["Sister","Brother","Cousin","Uncle"],answer:1,exp:"'Brother' means 'frère' in English. A male sibling is a brother, a female sibling is a sister."},
+    {q:"What do you call the children of your uncle or aunt?",opts:["Siblings","Cousins","Nephews","In-laws"],answer:1,exp:"The children of your uncle or aunt are called 'cousins' in English."},
+    // Parts of the body
+    {q:"What do you use to hear sounds?",opts:["Eyes","Nose","Ears","Mouth"],answer:2,exp:"You use your 'ears' to hear sounds. Eyes are for seeing, nose for smelling, mouth for speaking and eating."},
+    {q:"How many fingers does a person normally have?",opts:["8","12","10","6"],answer:2,exp:"A person normally has 10 fingers — 5 on each hand. This is important vocabulary for the body parts lesson."},
+    {q:"What is the correct sentence about colour?",opts:["The sky is red","The grass is blue","The sun is yellow","The sea is green"],answer:2,exp:"'The sun is yellow' is correct. The sky is blue, grass is green, and the sun/sunlight appears yellow."},
+    // Clothes
+    {q:"What do you wear on your feet (inside your shoes)?",opts:["Gloves","Socks","Belt","Cap"],answer:1,exp:"'Socks' are worn on your feet, inside your shoes. Gloves are for hands, belt for your waist, cap for your head."},
+    {q:"Which clothing item do boys/men wear on their legs?",opts:["Skirt","Dress","Trousers","Blouse"],answer:2,exp:"'Trousers' (or 'pants') are worn on the legs. Skirt and dress are typically female clothing items."},
+    // LEARNING SITUATION 3 — SOCIAL ENVIRONMENT
+    // Buildings and occupations
+    {q:"What is the place where sick people are treated?",opts:["School","Market","Hospital","Church"],answer:2,exp:"A 'hospital' is where sick people are treated by doctors and nurses."},
+    {q:"What do you call a person who teaches in a school?",opts:["Doctor","Teacher","Lawyer","Trader"],answer:1,exp:"A 'teacher' is a person who teaches in a school. Other occupations include doctor (hospital), lawyer (court), trader (market)."},
+    {q:"What does a 'policeman' do?",opts:["Sells goods at the market","Teaches children","Maintains law and order","Treats sick people"],answer:2,exp:"A policeman/policewoman maintains law and order in the community. They protect citizens and enforce laws."},
+    // Present continuous
+    {q:"Which sentence is in the present continuous tense?",opts:["She goes to school","She went to school","She is going to school","She will go to school"],answer:2,exp:"'She is going to school' is in the present continuous tense (to be + verb-ing). It describes an action happening right now."},
+    {q:"How do you form the present continuous tense?",opts:["Subject + verb + ed","Subject + will + verb","Subject + to be + verb-ing","Subject + verb + s"],answer:2,exp:"The present continuous is formed with: Subject + to be (am/is/are) + verb-ing. Example: I am reading."},
+    // Simple past
+    {q:"What is the simple past of 'to be' for 'I' and 'he/she'?",opts:["Am/is","Were/were","Was/was","Will be/will be"],answer:2,exp:"The simple past of 'to be' is 'was' for I, he, she, it — and 'were' for you, we, they."},
+    {q:"Which sentence is in the simple past tense?",opts:["I eat rice every day","I ate rice yesterday","I am eating rice","I will eat rice"],answer:1,exp:"'I ate rice yesterday' is in the simple past tense. It describes a completed action in the past."},
+    // Imperative
+    {q:"Which sentence is an imperative (order)?",opts:["He opens the door","She is opening the door","Open the door!","Did you open the door?"],answer:2,exp:"'Open the door!' is an imperative sentence. The imperative is used to give orders, instructions or advice."},
+    // Shopping
+    {q:"What do you say when you want to know the price of something?",opts:["Where is it?","How much is it?","What colour is it?","Who made it?"],answer:1,exp:"'How much is it?' is used to ask the price of an item when shopping. 'How many?' is for countable items."},
+    {q:"'Some' is used with _____ nouns.",opts:["Only plural","Only singular","Both countable and uncountable","Only uncountable"],answer:2,exp:"'Some' can be used with both countable plural nouns (some books) and uncountable nouns (some water)."},
+    // Celebrations
+    {q:"What is the national day of Benin celebrated on?",opts:["August 1st","July 14th","January 1st","December 25th"],answer:0,exp:"Benin's national independence day is celebrated on August 1st, commemorating independence from France in 1960."},
+    {q:"How do you express happiness in English?",opts:["I am sad","I feel great / I am happy","I am tired","I feel sick"],answer:1,exp:"'I feel great' or 'I am happy' are expressions of happiness (feelings and emotions) in English."},
+    // Comparative
+    {q:"Which sentence uses the comparative of superiority correctly?",opts:["Kofi is tall than Ama","Kofi is more tall than Ama","Kofi is taller than Ama","Kofi is tallest than Ama"],answer:2,exp:"'Kofi is taller than Ama' is correct. Short adjectives form the comparative by adding '-er than'."},
+    {q:"What is the comparative of 'good'?",opts:["Gooder","More good","Better","Goodest"],answer:2,exp:"'Better' is the irregular comparative of 'good'. Good → better → best are irregular forms."},
+    // Phonology
+    {q:"Which word has the sound /∫/ as in 'shoe'?",opts:["Chair","School","Ship","Sky"],answer:2,exp:"'Ship' contains the /∫/ sound. This sound is also found in 'shoe', 'shop', 'sheep'. 'Chair' has /ʧ/ sound."},
+    {q:"What is the plural of 'child' in English?",opts:["Childs","Children","Childes","Child"],answer:1,exp:"'Children' is the irregular plural of 'child'. English has many irregular plural nouns that must be memorized."},
+  ],
+
+  // ══════════════════════════════════════
+  // CULTURE GENERALE BENIN
+  // ══════════════════════════════════════
+  'culture_generale': [
+    {q:"Quelle est la capitale officielle du Bénin ?",opts:["Cotonou","Porto-Novo","Parakou","Abomey"],answer:1,exp:"Porto-Novo est la capitale officielle du Bénin, bien que Cotonou soit la plus grande ville et le siège du gouvernement."},
+    {q:"Combien de départements compte le Bénin ?",opts:["10","12","8","14"],answer:1,exp:"Le Bénin compte 12 départements depuis 1999."},
+    {q:"Quel est le plus grand fleuve du Bénin ?",opts:["Mono","Niger","Ouémé","Couffo"],answer:2,exp:"L'Ouémé est le plus grand fleuve du Bénin avec 510 km de long."},
+    {q:"En quelle année le Bénin a-t-il obtenu son indépendance ?",opts:["1958","1962","1960","1963"],answer:2,exp:"Le Bénin (ex-Dahomey) est indépendant depuis le 1er août 1960."},
+    {q:"Quel est le nom du dernier roi indépendant du Dahomey ?",opts:["Ghézo","Glèlè","Béhanzin","Agoli-Agbo"],answer:2,exp:"Béhanzin (1890-1894) fut le dernier roi indépendant du Dahomey avant la colonisation française."},
+    {q:"Quel est le parc national situé au nord-ouest du Bénin ?",opts:["Parc W","Parc de la Pendjari","Parc de Kétou","Parc de Lokossa"],answer:1,exp:"Le Parc national de la Pendjari est situé au nord-ouest du Bénin, près de la frontière avec le Burkina Faso et le Togo."},
+    {q:"Combien de communes compte le Bénin ?",opts:["55","77","65","90"],answer:1,exp:"Le Bénin compte 77 communes réparties dans ses 12 départements."},
+  ],
+};
+
+// Get questions based on level and subject
+function getQuestionsForQuiz(level, matiere){
+  var key = '';
+  var lv = level.toLowerCase();
+  var mat = matiere.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  
+  if(lv.indexOf('6') >= 0 || lv.indexOf('sixieme') >= 0){
+    if(mat.indexOf('anglais') >= 0 || mat.indexOf('english') >= 0) key = '6eme_anglais';
+    else if(mat.indexOf('histoire') >= 0 || mat.indexOf('geo') >= 0) key = 'culture_generale';
+    else key = 'culture_generale';
+  } else if(lv.indexOf('4') >= 0 || lv.indexOf('quatrieme') >= 0){
+    if(mat.indexOf('histoire') >= 0) key = '4eme_histoire';
+    else if(mat.indexOf('geo') >= 0) key = '4eme_geo';
+    else if(mat.indexOf('droit') >= 0 || mat.indexOf('paix') >= 0) key = '4eme_droits';
+    else key = 'culture_generale';
+  } else {
+    key = 'culture_generale';
+  }
+  
+  var bank = QUESTION_BANK[key] || QUESTION_BANK['culture_generale'];
+  var shuffled = bank.slice().sort(function(){return Math.random()-.5;});
+  return shuffled.slice(0, Math.min(5, shuffled.length));
+}
+
+var DEMO_QUESTIONS = QUESTION_BANK['culture_generale'].slice(0,5);
+
+async function startQuiz(){
+  if(!canAccess()){openM('auth');showToast('👋 Cree ton compte pour jouer !');return;}
+  var level=document.getElementById('qLvl').value;
+  var mat=document.getElementById('qMat').value;
+  if(!level||!mat){showToast('⚠️ Choisis ton niveau et ta matiere !');return;}
+  var btn=document.querySelector('#quizArea .gen-btn');
+  if(btn){btn.disabled=true;btn.textContent='⏳ Preparation...';}
+  try{
+    var prompt='Tu es professeur expert en programmes scolaires officiels du Benin (MEMP). Genere exactement 5 questions de quiz difficiles pour niveau '+level+' en '+mat+'.\nRules:\n- 80% questions du programme officiel beninois\n- 20% culture generale\n- Chaque question sur 4 points (soit /20 total)\n- Questions progressives : facile -> difficile\n- Format JSON UNIQUEMENT sans markdown:\n[{"q":"Question precise?","opts":["A","B","C","D"],"answer":0,"exp":"Explication pedagogique courte"}]\nanswer=index bonne reponse (0-3). JSON pur uniquement.';
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})
+    });
+    var j=await r.json();
+    var txt=j.content?j.content.map(function(c){return c.text||'';}).join(''):'[]';
+    var clean=txt.replace(/```json|```/g,'').trim();
+    qQuestions=JSON.parse(clean);
+  }catch(e){
+    // Use offline question bank based on level and subject
+    qQuestions = getQuestionsForQuiz(level, mat);
+    if(!qQuestions || qQuestions.length === 0) qQuestions = DEMO_QUESTIONS;
+  }
+  if(btn){btn.disabled=false;btn.textContent='🚀 Lancer le defi !';}
+  qCurrent=0;qScore=0;qTimeLeft=60;
+  startQTimer();showQQuestion();
+}
+
+function startQTimer(){
+  if(qTimer)clearInterval(qTimer);
+  qTimer=setInterval(function(){
+    qTimeLeft--;
+    var m=Math.floor(qTimeLeft/60),s=qTimeLeft%60;
+    var el=document.getElementById('quizTimer');
+    if(el){
+      el.textContent=m+':'+(s<10?'0':'')+s;
+      if(qTimeLeft<=10){el.style.background='var(--red)';el.style.color='#fff';el.style.animation='shake .3s ease infinite';}
+      else if(qTimeLeft<=20){el.style.background='rgba(239,68,68,.15)';el.style.color='var(--red)';}
+    }
+    if(qTimeLeft<=0){clearInterval(qTimer);finishQuiz();}
+  },1000);
+}
+
+function showQQuestion(){
+  var area=document.getElementById('quizArea');
+  if(!area||qCurrent>=qQuestions.length){finishQuiz();return;}
+  var q=qQuestions[qCurrent];
+  var opts=q.opts.map(function(o,i){
+    return'<button class="quiz-opt" onclick="answerQ('+i+')" style="width:100%;border:none;cursor:pointer;text-align:left">'+String.fromCharCode(65+i)+'. '+o+'</button>';
+  }).join('');
+  area.innerHTML='<div style="background:var(--light);border:1.5px solid var(--border);border-radius:13px;padding:14px">'+
+    '<div style="display:flex;justify-content:space-between;margin-bottom:7px">'+
+      '<span style="font-size:.7rem;color:var(--muted);font-family:Space Mono,monospace">Q '+(qCurrent+1)+'/'+qQuestions.length+'</span>'+
+      '<span style="font-size:.7rem;color:var(--blue);font-family:Space Mono,monospace">Score: '+qScore+'</span>'+
+    '</div>'+
+    '<div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:'+Math.round((qCurrent/qQuestions.length)*100)+'%"></div></div>'+
+    '<div class="quiz-q-text">'+q.q+'</div>'+
+    '<div class="quiz-options">'+opts+'</div>'+
+  '</div>';
+}
+
+function answerQ(idx){
+  var q=qQuestions[qCurrent];
+  var btns=document.querySelectorAll('.quiz-opt');
+  btns.forEach(function(b,i){
+    b.disabled=true;
+    if(i===q.answer)b.style.cssText='border:2px solid var(--green);background:rgba(16,185,129,.1);color:#065F46;width:100%;border-radius:10px;padding:10px 13px;font-family:Outfit,sans-serif;text-align:left;cursor:default';
+    else if(i===idx&&idx!==q.answer)b.style.cssText='border:2px solid var(--red);background:rgba(239,68,68,.08);color:#991B1B;width:100%;border-radius:10px;padding:10px 13px;font-family:Outfit,sans-serif;text-align:left;cursor:default';
+    else b.style.cssText='width:100%;border:1.5px solid var(--border);background:var(--light);border-radius:10px;padding:10px 13px;font-family:Outfit,sans-serif;text-align:left;cursor:default;opacity:.6';
+  });
+  if(idx===q.answer)qScore++;
+  setTimeout(function(){qCurrent++;showQQuestion();},1300);
+}
+
+function finishQuiz(){
+  if(qTimer)clearInterval(qTimer);
+  var pct=Math.round((qScore/qQuestions.length)*100);
+  var scoreSur20=Math.round((qScore/qQuestions.length)*20*10)/10;
+  var pts=pct>=90?20:pct>=70?10:5;
+  var msg=pct>=90?'🌟 Excellent !':pct>=70?'👍 Bien joue !':'💪 Continue !';
+  addPoints(pts,msg);
+  // Save discipline score
+  var mat=(document.getElementById('qMat')||{}).value||'';
+  if(mat)saveDiscScore(mat, scoreSur20);
+  var area=document.getElementById('quizArea');
+  var mat2=(document.getElementById('qMat')||{}).value||'';
+  if(area)area.innerHTML='<div style="text-align:center;padding:18px;background:var(--light);border:1.5px solid var(--border);border-radius:13px">'+
+    '<div style="font-family:Playfair Display,serif;font-weight:900;font-size:2.2rem;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'+scoreSur20+'/20</div>'+
+    '<div style="font-size:.78rem;color:var(--muted);margin:3px 0">'+qScore+'/'+qQuestions.length+' bonnes réponses</div>'+
+    '<div style="font-size:.83rem;color:var(--text);margin:5px 0;font-weight:600">'+msg+'</div>'+
+    (scoreSur20>=12?'<div style="font-size:.72rem;color:var(--green);margin:4px 0">✅ Moyenne ≥ 12/20 · Progresse vers le badge '+mat2+' !</div>':'<div style="font-size:.72rem;color:var(--red);margin:4px 0">⚠️ Moyenne < 12/20 · Continue à t\'entrainer !</div>')+
+    '<div class="pts-badge" style="margin:8px auto;display:inline-flex">+'+pts+' points !</div>'+
+    '<div style="font-size:.73rem;color:var(--muted);margin-top:7px">Reviens demain pour le prochain defi !</div>'+
+  '</div>';
+}
+
+// INIT
+window.addEventListener('load',function(){
+  updateUI();
+  if(USER){
+    var today=new Date().toDateString();
+    var last=localStorage.getItem('zna_last');
+    if(last!==today){
+      var yesterday=new Date(Date.now()-86400000).toDateString();
+      STREAK=last===yesterday?STREAK+1:1;
+      localStorage.setItem('zna_streak',STREAK);
+      localStorage.setItem('zna_last',today);
+      addPoints(5,'🔥 Connexion du jour !');
+    }
+    var h=isTrial()?Math.ceil((172800000-(Date.now()-TRIAL))/3600000):0;
+    if(h>0)setTimeout(function(){showToast('👋 '+USER.u+' · '+h+'h essai restantes');},1500);
+    else if(isSub())setTimeout(function(){showToast('👋 Bienvenue '+USER.u+' !');},1500);
+  }
+});
+</script>
+</body>
+</html>
